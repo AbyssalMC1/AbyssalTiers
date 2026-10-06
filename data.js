@@ -169,7 +169,8 @@ const players = [
         fireballmace: 0,
         crystal: 0,
         cart: 0,
-        pearlfight: 0
+        pearlfight: 0,
+        spleef: 0
     },
 
 
