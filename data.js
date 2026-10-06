@@ -3,7 +3,7 @@ const gamemodes = {
     sword: {
         name: "Sword",
         icon: "⚔",
-        description: "Traditional sword PvP."
+        description: "Sword PvP rankings."
     },
 
     axe: {
@@ -27,13 +27,13 @@ const gamemodes = {
     diapot: {
         name: "DiaPot",
         icon: "◆",
-        description: "Diamond potion PvP."
+        description: "Diamond Potion PvP."
     },
 
     nethpot: {
-        name: "NetherPot",
+        name: "NethPot",
         icon: "♨",
-        description: "Netherite potion PvP."
+        description: "Netherite Potion PvP."
     },
 
     smp: {
@@ -63,61 +63,61 @@ const gamemodes = {
     elymace: {
         name: "ElyMace",
         icon: "E",
-        description: "Elytra mace combat."
+        description: "Elytra Mace PvP."
     },
 
     elyspear: {
         name: "ElySpear",
         icon: "E",
-        description: "Elytra spear combat."
+        description: "Elytra Spear PvP."
     },
 
     spearmace: {
         name: "SpearMace",
         icon: "M",
-        description: "Spear and mace combat."
+        description: "Spear Mace PvP."
     },
 
     creeperpvp: {
         name: "Creeper PvP",
         icon: "C",
-        description: "Creeper based PvP."
+        description: "Creeper PvP rankings."
     },
 
     kappapvp: {
         name: "Kappa PvP",
         icon: "K",
-        description: "Kappa PvP."
+        description: "Kappa PvP rankings."
     },
 
     tridentmace: {
         name: "TridentMace",
         icon: "T",
-        description: "Trident and mace combat."
+        description: "Trident Mace PvP."
     },
 
     tridentspear: {
         name: "TridentSpear",
         icon: "T",
-        description: "Trident and spear combat."
+        description: "Trident Spear PvP."
     },
 
     fireballfight: {
         name: "Fireball Fight",
         icon: "F",
-        description: "Fireball PvP."
+        description: "Fireball Fight rankings."
     },
 
     fireballmace: {
         name: "Fireball Mace",
         icon: "F",
-        description: "Fireball and mace combat."
+        description: "Fireball Mace rankings."
     },
 
     crystal: {
         name: "Crystal",
         icon: "◇",
-        description: "End Crystal PvP."
+        description: "Crystal PvP rankings."
     },
 
     cartspleef: {
@@ -129,29 +129,11 @@ const gamemodes = {
     pearlfight: {
         name: "Pearl Fight",
         icon: "P",
-        description: "Ender Pearl PvP."
+        description: "Pearl Fight rankings."
     }
 
 };
 
-
-/*
-=================================================
-PLAYER DATA
-=================================================
-
-Pentru fiecare player poți pune punctele
-lui în fiecare gamemode.
-
-EXEMPLU:
-
-Sword: 1000
-Axe: 850
-
-Overall-ul este calculat automat.
-
-=================================================
-*/
 
 
 const players = [
