@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #0d0d0d;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    background: #151515;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+header p {
+    color: #aaa;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: #111;
+}
+
+nav button {
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+nav button:hover {
+    background: #333;
+}
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+#modeTitle {
+    text-align: center;
+    font-size: 30px;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    background: #171717;
+    border: 1px solid #292929;
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.rank {
+    width: 60px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.name {
+    flex: 1;
+    font-size: 18px;
+}
+
+.tier {
+    font-weight: bold;
+    padding: 7px 14px;
+    border-radius: 5px;
+}
+
+.HT1 {
+    background: #ff5555;
+}
+
+.LT1 {
+    background: #ff7777;
+}
+
+.HT2 {
+    background: #ffaa00;
+}
+
+.LT2 {
+    background: #ffcc44;
+}
+
+.HT3 {
+    background: #55aaff;
+}
+
+.LT3 {
+    background: #77bbff;
+}
+
+.HT4 {
+    background: #55cc55;
+}
+
+.LT4 {
+    background: #77dd77;
+}
+
+.HT5 {
+    background: #999999;
+}
+
+.LT5 {
+    background: #777777;
+}
