@@ -3,7 +3,9 @@
 ============================================ */
 
 
-/* GET TIER */
+/* ============================================
+   GET TIER
+============================================ */
 
 function getTier(points) {
 
@@ -25,8 +27,9 @@ function getTier(points) {
 }
 
 
-
-/* MINECRAFT HEAD */
+/* ============================================
+   MINECRAFT HEAD
+============================================ */
 
 function getHead(name) {
 
@@ -41,8 +44,9 @@ function getHead(name) {
 }
 
 
-
-/* OVERALL POINTS */
+/* ============================================
+   OVERALL POINTS
+============================================ */
 
 function calculateOverall(player) {
 
@@ -76,8 +80,9 @@ function calculateOverall(player) {
 }
 
 
-
-/* CREATE PLAYER */
+/* ============================================
+   CREATE PLAYER
+============================================ */
 
 function createPlayerRow(
     player,
@@ -147,8 +152,9 @@ function createPlayerRow(
 }
 
 
-
-/* SHOW OVERALL */
+/* ============================================
+   SHOW OVERALL
+============================================ */
 
 function showOverall() {
 
@@ -182,8 +188,9 @@ function showOverall() {
 }
 
 
-
-/* RENDER OVERALL */
+/* ============================================
+   RENDER OVERALL
+============================================ */
 
 function renderOverall() {
 
@@ -250,8 +257,9 @@ function renderOverall() {
 }
 
 
-
-/* RENDER GAMEMODES */
+/* ============================================
+   RENDER GAMEMODES
+============================================ */
 
 function renderGamemodes() {
 
@@ -288,7 +296,10 @@ function renderGamemodes() {
 
                     <div class="mode-icon">
 
-                        ${mode.icon}
+                        <img
+                            src="${mode.icon}"
+                            alt="${mode.name}"
+                        >
 
                     </div>
 
@@ -332,8 +343,9 @@ function renderGamemodes() {
 }
 
 
-
-/* SHOW GAMEMODE */
+/* ============================================
+   SHOW GAMEMODE
+============================================ */
 
 function showGamemode(modeKey) {
 
@@ -408,8 +420,9 @@ function showGamemode(modeKey) {
 }
 
 
-
-/* RENDER GAMEMODE */
+/* ============================================
+   RENDER GAMEMODE
+============================================ */
 
 function renderGamemode(modeKey) {
 
@@ -468,8 +481,9 @@ function renderGamemode(modeKey) {
 }
 
 
-
-/* PLAYER PROFILE */
+/* ============================================
+   PLAYER PROFILE
+============================================ */
 
 function showPlayerProfile(name) {
 
@@ -556,11 +570,17 @@ function showPlayerProfile(name) {
                     data-mode="${modeKey}"
                 >
 
-                    <div>
+                    <div class="profile-mode-name">
 
-                        ${mode.icon}
+                        <img
+                            class="profile-mode-icon"
+                            src="${mode.icon}"
+                            alt="${mode.name}"
+                        >
 
-                        ${mode.name}
+                        <span>
+                            ${mode.name}
+                        </span>
 
                     </div>
 
@@ -706,8 +726,9 @@ function showPlayerProfile(name) {
 }
 
 
-
-/* START */
+/* ============================================
+   START
+============================================ */
 
 document.addEventListener(
     "DOMContentLoaded",
