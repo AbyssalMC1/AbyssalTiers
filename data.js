@@ -2,7 +2,7 @@ const gamemodes = {
 
     sword: {
         name: "Sword",
-        icon: "⚔",
+        icon: "images/sword.png",
         description: "Sword PvP rankings."
     },
 
