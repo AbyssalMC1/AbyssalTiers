@@ -247,6 +247,34 @@ const players = [
         crystal: 0,
         cartspleef: 0,
         pearlfight: 0
+    },
+
+    
+    {
+        name: "Kappa8081",
+
+        sword: 0,
+        axe: 0,
+        mace: 0,
+        uhc: 0,
+        diapot: 0,
+        nethpot: 0,
+        smp: 0,
+        diasmp: 0,
+        shieldlessuhc: 0,
+        bridge: 0,
+        elymace: 0,
+        elyspear: 0,
+        spearmace: 0,
+        creeperpvp: 0,
+        kappapvp: 0,
+        tridentmace: 0,
+        tridentspear: 0,
+        fireballfight: 0,
+        fireballmace: 0,
+        crystal: 0,
+        cartspleef: 0,
+        pearlfight: 0
     }
 
 ];
