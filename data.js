@@ -50,86 +50,93 @@ const gamemodes = {
 
     shieldlessuhc: {
         name: "Shieldless UHC",
-        icon: "◇",
+        icon: "images/shieldless.png",
         description: "UHC without shields."
     },
 
     bridge: {
         name: "Bridge",
-        icon: "B",
+        icon: "images/bridge.png",
         description: "Bridge PvP rankings."
     },
 
     elymace: {
         name: "ElyMace",
-        icon: "E",
+        icon: "images/elymace.png",
         description: "Elytra Mace PvP."
     },
 
     elyspear: {
         name: "ElySpear",
-        icon: "E",
+        icon: "images/elyspear.png",
         description: "Elytra Spear PvP."
     },
 
     spearmace: {
         name: "SpearMace",
-        icon: "M",
+        icon: "images/spearmace.png",
         description: "Spear Mace PvP."
     },
 
     creeperpvp: {
         name: "Creeper PvP",
-        icon: "C",
+        icon: "images/creeper.png",
         description: "Creeper PvP rankings."
     },
 
     kappapvp: {
         name: "Kappa PvP",
-        icon: "K",
+        icon: "images/koala.png",
         description: "Kappa PvP rankings."
     },
 
     tridentmace: {
         name: "TridentMace",
-        icon: "T",
+        icon: "images/tridentmace.png",
         description: "Trident Mace PvP."
     },
 
     tridentspear: {
         name: "TridentSpear",
-        icon: "T",
+        icon: "images/tridentspear.png",
         description: "Trident Spear PvP."
     },
 
     fireballfight: {
         name: "Fireball Fight",
-        icon: "F",
+        icon: "images/fireballfight.png",
         description: "Fireball Fight rankings."
     },
 
     fireballmace: {
         name: "Fireball Mace",
-        icon: "F",
+        icon: "images/fireballmace.png",
         description: "Fireball Mace rankings."
     },
 
     crystal: {
         name: "Crystal",
-        icon: "◇",
+        icon: "images/crystal.png",
         description: "Crystal PvP rankings."
     },
 
-    cartspleef: {
-        name: "Cart Spleef",
-        icon: "C",
-        description: "Cart Spleef rankings."
+    cart: {
+        name: "Cart",
+        icon: "images/cart.png
+            ",
+        description: "Cart rankings."
     },
 
     pearlfight: {
         name: "Pearl Fight",
-        icon: "P",
+        icon: "images/pearlfight.png",
         description: "Pearl Fight rankings."
+    },
+    
+    spleef: {
+        name: "Spleef",
+        icon: "images/spleef.png",
+        description: "Spleef rankings."
     }
 
 };
@@ -161,7 +168,7 @@ const players = [
         fireballfight: 0,
         fireballmace: 0,
         crystal: 0,
-        cartspleef: 0,
+        cart: 0,
         pearlfight: 0
     },
 
@@ -189,8 +196,9 @@ const players = [
         fireballfight: 0,
         fireballmace: 0,
         crystal: 0,
-        cartspleef: 0,
-        pearlfight: 0
+        cart: 0,
+        pearlfight: 0,
+        spleef: 0
     },
 
 
@@ -217,8 +225,9 @@ const players = [
         fireballfight: 0,
         fireballmace: 0,
         crystal: 0,
-        cartspleef: 0,
-        pearlfight: 0
+        cart: 0,
+        pearlfight: 0,
+        spleef: 0
     },
 
 
@@ -245,8 +254,9 @@ const players = [
         fireballfight: 0,
         fireballmace: 0,
         crystal: 0,
-        cartspleef: 0,
-        pearlfight: 0
+        carts: 0,
+        pearlfight: 0,
+        spleef: 0
     },
 
     
@@ -273,8 +283,9 @@ const players = [
         fireballfight: 0,
         fireballmace: 0,
         crystal: 0,
-        cartspleef: 0,
-        pearlfight: 0
+        cart: 0,
+        pearlfight: 0,
+        spleef: 0
     }
 
 ];
