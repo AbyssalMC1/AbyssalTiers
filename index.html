@@ -1,58 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AbyssalTiers</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Abyssal Tiers</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <h1>AbyssalTiers</h1>
-    <p>WarSMP Tier List</p>
-</header>
+    <!-- BACKGROUND -->
 
-<nav>
-    <button onclick="showMode('Overall')">Overall</button>
-    <button onclick="showMode('Sword')">Sword</button>
-    <button onclick="showMode('Axe')">Axe</button>
-    <button onclick="showMode('Mace')">Mace</button>
-    <button onclick="showMode('SMP')">SMP</button>
-    <button onclick="showMode('Diamond SMP')">DiaSMP</button>
-    <button onclick="showMode('Spear Mace')">SpearMace</button>
-    <button onclick="showMode('Diamond Pot')">DiaPot</button>
-    <button onclick="showMode('Netherite Pot')">NethPot</button>
-    <button onclick="showMode('Crystal')">Crystal</button>
-    <button onclick="showMode('UHC')">UHC</button>
-    <button onclick="showMode('Spear Elytra')">Spear Elytra</button>
-    <button onclick="showMode('Fireball Fight')">Fireball Fight</button>
-    <button onclick="showMode('Bridge')">Bridge</button>
-    <button onclick="showMode('SpearElytra')">SpearElytra</button>
-    <button onclick="showMode('Creeper')">Creeper</button>
-    <button onclick="showMode('Fireball Mace')">Fireball Mace</button>
-    <button onclick="showMode('Shieldless UHC')">Shieldless UHC</button>
-    <button onclick="showMode('Pearl Fight')">Pearl Fight</button>
-    <button onclick="showMode('Cart')">Cart</button>
-    <button onclick="showMode('Elytra Mace')">Elytra Mace</button>
-    <button onclick="showMode('Trident Mace')">Trident Mace</button>
-    <button onclick="showMode('Trident Spear')">Trident Spear</button>
-    <button onclick="showMode('Kappa PvP')">Kappa PvP</button>
-</nav>
+    <div class="background"></div>
 
-<main>
+    <!-- NAVBAR -->
 
-    <h2 id="modeTitle">Sword</h2>
+    <header class="navbar">
 
-    <div id="leaderboard"></div>
+        <div class="logo">
+            <span class="logo-main">ABYSSAL</span>
+            <span class="logo-sub">TIERS</span>
+        </div>
 
-</main>
+        <div class="nav-links">
 
-<script src="data.js"></script>
-<script src="script.js"></script>
+            <button class="nav-button active"
+                    onclick="showOverall()">
+                Overall
+            </button>
+
+            <button class="nav-button"
+                    onclick="scrollToModes()">
+                Gamemodes
+            </button>
+
+        </div>
+
+        <div class="search-container">
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search player..."
+                oninput="searchPlayer()"
+            >
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="hero">
+
+            <div>
+
+                <div class="small-title">
+                    MINECRAFT PVP RANKINGS
+                </div>
+
+                <h1>
+                    Abyssal
+                    <span>Tiers</span>
+                </h1>
+
+                <p>
+                    Competitive Minecraft PvP rankings,
+                    created by the community.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- OVERALL -->
+
+        <section id="overallSection">
+
+            <div class="section-title">
+
+                <div>
+                    <span class="section-small">
+                        RANKINGS
+                    </span>
+
+                    <h2>
+                        Overall
+                    </h2>
+                </div>
+
+                <div class="player-count"
+                     id="overallPlayerCount">
+                </div>
+
+            </div>
+
+            <div id="overallLeaderboard"
+                 class="leaderboard">
+            </div>
+
+        </section>
+
+
+        <!-- GAMEMODES -->
+
+        <section id="modesSection">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="section-small">
+                        GAME MODES
+                    </span>
+
+                    <h2>
+                        PvP Gamemodes
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div id="gamemodeGrid"
+                 class="gamemode-grid">
+            </div>
+
+        </section>
+
+
+        <!-- GAMEMODE PAGE -->
+
+        <section id="gamemodePage"
+                 class="hidden">
+
+            <button class="back-button"
+                    onclick="showOverall()">
+
+                ← Back to Overall
+
+            </button>
+
+            <div class="gamemode-header">
+
+                <div>
+
+                    <span class="section-small">
+                        GAMEMODE
+                    </span>
+
+                    <h2 id="gamemodeTitle">
+                        Sword
+                    </h2>
+
+                    <p id="gamemodeDescription">
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div id="gamemodeLeaderboard"
+                 class="leaderboard">
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH RESULTS -->
+
+        <section id="searchSection"
+                 class="hidden">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="section-small">
+                        SEARCH
+                    </span>
+
+                    <h2>
+                        Players
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div id="searchResults"
+                 class="leaderboard">
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div>
+            Abyssal Tiers
+        </div>
+
+        <span>
+            Custom Minecraft PvP Rankings
+        </span>
+
+    </footer>
+
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
