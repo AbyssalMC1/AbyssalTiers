@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyTierList</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>MyTierList</h1>
+    <p>Custom Minecraft Tier List</p>
+</header>
+
+<nav>
+    <button onclick="showMode('Sword')">Sword</button>
+    <button onclick="showMode('Axe')">Axe</button>
+    <button onclick="showMode('Crystal')">Crystal</button>
+    <button onclick="showMode('UHC')">UHC</button>
+</nav>
+
+<main>
+
+    <h2 id="modeTitle">Sword</h2>
+
+    <div id="leaderboard"></div>
+
+</main>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
