@@ -38,7 +38,7 @@ const gamemodes = {
 
     smp: {
         name: "SMP",
-        icon: "images/smp.png",
+        icon: "images/Smp.png",
         description: "SMP PvP rankings."
     },
 
