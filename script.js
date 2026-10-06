@@ -1,12 +1,9 @@
-/* =====================================================
+/* ============================================
    ABYSSAL TIERS
-   MAIN SCRIPT
-===================================================== */
+============================================ */
 
 
-/* =====================================================
-   GET TIER
-===================================================== */
+/* GET TIER */
 
 function getTier(points) {
 
@@ -28,30 +25,31 @@ function getTier(points) {
 }
 
 
-/* =====================================================
-   GET MINECRAFT HEAD
-===================================================== */
 
-function getHead(playerName) {
+/* MINECRAFT HEAD */
+
+function getHead(name) {
 
     return `
         <img
             class="head"
-            src="https://mc-heads.net/avatar/${encodeURIComponent(playerName)}/44"
-            alt="${playerName}"
+            src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/44"
+            alt="${name}"
         >
     `;
+
 }
 
 
-/* =====================================================
-   CALCULATE OVERALL
-===================================================== */
+
+/* OVERALL POINTS */
 
 function calculateOverall(player) {
 
     let total = 0;
-    let count = 0;
+
+    let amount = 0;
+
 
     Object.keys(gamemodes).forEach(function(mode) {
 
@@ -59,33 +57,44 @@ function calculateOverall(player) {
 
             total += player[mode];
 
-            count++;
+            amount++;
 
         }
 
     });
 
-    if (count === 0) {
+
+    if (amount === 0) {
+
         return 0;
+
     }
 
-    return Math.round(total / count);
+
+    return Math.round(total / amount);
+
 }
 
 
-/* =====================================================
-   CREATE PLAYER ROW
-===================================================== */
 
-function createPlayerRow(player, position, points) {
+/* CREATE PLAYER */
 
-    const tier = getTier(points);
+function createPlayerRow(
+    player,
+    position,
+    points
+) {
 
-    const row = document.createElement("div");
+    const row =
+        document.createElement("div");
 
-    row.className = "player";
 
-    row.style.cursor = "pointer";
+    const tier =
+        getTier(points);
+
+
+    row.className =
+        "player";
 
 
     row.innerHTML = `
@@ -109,16 +118,11 @@ function createPlayerRow(player, position, points) {
         </div>
 
         <div class="points">
-
-            ${points.toLocaleString()}
-            pts
-
+            ${points.toLocaleString()} pts
         </div>
 
         <div class="tier ${tier}">
-
             ${tier}
-
         </div>
 
     `;
@@ -126,57 +130,60 @@ function createPlayerRow(player, position, points) {
 
     /* CLICK PLAYER */
 
-    row.addEventListener("click", function() {
+    row.addEventListener(
+        "click",
+        function() {
 
-        showPlayerProfile(player.name);
+            showPlayerProfile(
+                player.name
+            );
 
-    });
+        }
+    );
 
 
     return row;
+
 }
 
 
-/* =====================================================
-   SHOW OVERALL
-===================================================== */
+
+/* SHOW OVERALL */
 
 function showOverall() {
 
     document
-        .getElementById("overallSection")
+        .getElementById(
+            "overallSection"
+        )
         .classList.remove("hidden");
 
 
     document
-        .getElementById("modesSection")
+        .getElementById(
+            "modesSection"
+        )
         .classList.remove("hidden");
 
 
     document
-        .getElementById("gamemodePage")
+        .getElementById(
+            "gamemodePage"
+        )
         .classList.add("hidden");
 
 
     document
-        .getElementById("playerProfile")
+        .getElementById(
+            "playerProfile"
+        )
         .classList.add("hidden");
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
 
 }
 
 
-/* =====================================================
-   RENDER OVERALL
-===================================================== */
+
+/* RENDER OVERALL */
 
 function renderOverall() {
 
@@ -189,55 +196,62 @@ function renderOverall() {
     leaderboard.innerHTML = "";
 
 
-    const sortedPlayers = players
-        .map(function(player) {
+    const sorted =
+        players
+            .map(function(player) {
 
-            return {
+                return {
 
-                player: player,
+                    player: player,
 
-                points:
-                    calculateOverall(player)
+                    points:
+                        calculateOverall(player)
 
-            };
+                };
 
-        })
-        .sort(function(a, b) {
-
-            return b.points - a.points;
-
-        });
+            })
 
 
-    sortedPlayers.forEach(function(entry, index) {
+            .sort(function(a, b) {
 
-        const row = createPlayerRow(
+                return b.points - a.points;
 
-            entry.player,
-
-            index + 1,
-
-            entry.points
-
-        );
+            });
 
 
-        leaderboard.appendChild(row);
+    sorted.forEach(
+        function(entry, index) {
 
-    });
+            const row =
+                createPlayerRow(
+
+                    entry.player,
+
+                    index + 1,
+
+                    entry.points
+
+                );
 
 
-    document.getElementById(
-        "overallPlayerCount"
-    ).textContent =
+            leaderboard.appendChild(row);
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "overallPlayerCount"
+        )
+        .textContent =
         players.length + " players";
 
 }
 
 
-/* =====================================================
-   RENDER GAMEMODES
-===================================================== */
+
+/* RENDER GAMEMODES */
 
 function renderGamemodes() {
 
@@ -250,71 +264,76 @@ function renderGamemodes() {
     grid.innerHTML = "";
 
 
-    Object.keys(gamemodes).forEach(function(modeKey) {
-
-        const mode =
-            gamemodes[modeKey];
+    Object.keys(gamemodes)
+        .forEach(function(modeKey) {
 
 
-        const card =
-            document.createElement("div");
+            const mode =
+                gamemodes[modeKey];
 
 
-        card.className =
-            "gamemode-card";
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        card.innerHTML = `
+            card.className =
+                "gamemode-card";
 
-            <div>
 
-                <div class="mode-icon">
+            card.innerHTML = `
 
-                    ${mode.icon}
+                <div>
+
+                    <div class="mode-icon">
+
+                        ${mode.icon}
+
+                    </div>
+
+                    <div class="mode-name">
+
+                        ${mode.name}
+
+                    </div>
 
                 </div>
 
-                <div class="mode-name">
 
-                    ${mode.name}
+                <div class="mode-players">
+
+                    ${players.length}
+                    players
 
                 </div>
 
-            </div>
-
-            <div class="mode-players">
-
-                ${players.length} players
-
-            </div>
-
-        `;
+            `;
 
 
-        /* IMPORTANT:
-           CLICK PE GAMEMODE
-        */
+            /* CLICK GAMEMODE */
 
-        card.addEventListener(
-            "click",
-            function() {
+            card.addEventListener(
+                "click",
+                function() {
 
-                showGamemode(modeKey);
+                    showGamemode(
+                        modeKey
+                    );
 
-            }
-        );
+                }
+            );
 
 
-        grid.appendChild(card);
+            grid.appendChild(card);
 
-    });
+        });
 
 }
 
 
-/* =====================================================
-   SHOW GAMEMODE
-===================================================== */
+
+/* SHOW GAMEMODE */
 
 function showGamemode(modeKey) {
 
@@ -324,57 +343,58 @@ function showGamemode(modeKey) {
 
     if (!mode) {
 
-        console.error(
-            "Gamemode not found:",
-            modeKey
-        );
-
         return;
 
     }
 
 
-    /* Hide homepage */
-
     document
-        .getElementById("overallSection")
+        .getElementById(
+            "overallSection"
+        )
         .classList.add("hidden");
 
 
     document
-        .getElementById("modesSection")
+        .getElementById(
+            "modesSection"
+        )
         .classList.add("hidden");
 
 
     document
-        .getElementById("playerProfile")
+        .getElementById(
+            "playerProfile"
+        )
         .classList.add("hidden");
 
 
-    /* Show gamemode */
-
     document
-        .getElementById("gamemodePage")
+        .getElementById(
+            "gamemodePage"
+        )
         .classList.remove("hidden");
 
 
-    /* Title */
-
     document
-        .getElementById("gamemodeTitle")
+        .getElementById(
+            "gamemodeTitle"
+        )
         .textContent =
         mode.name;
 
 
-    /* Description */
-
     document
-        .getElementById("gamemodeDescription")
+        .getElementById(
+            "gamemodeDescription"
+        )
         .textContent =
         mode.description;
 
 
-    renderGamemode(modeKey);
+    renderGamemode(
+        modeKey
+    );
 
 
     window.scrollTo({
@@ -388,9 +408,8 @@ function showGamemode(modeKey) {
 }
 
 
-/* =====================================================
-   RENDER GAMEMODE
-===================================================== */
+
+/* RENDER GAMEMODE */
 
 function renderGamemode(modeKey) {
 
@@ -403,95 +422,94 @@ function renderGamemode(modeKey) {
     leaderboard.innerHTML = "";
 
 
-    const sortedPlayers = players
+    const sorted =
+        players
+            .map(function(player) {
 
-        .map(function(player) {
+                return {
 
-            return {
+                    player: player,
 
-                player: player,
+                    points:
+                        player[modeKey] || 0
 
-                points:
-                    typeof player[modeKey] === "number"
-                        ? player[modeKey]
-                        : 0
+                };
 
-            };
-
-        })
-
-        .sort(function(a, b) {
-
-            return b.points - a.points;
-
-        });
+            })
 
 
-    sortedPlayers.forEach(function(entry, index) {
+            .sort(function(a, b) {
 
-        const row = createPlayerRow(
+                return b.points - a.points;
 
-            entry.player,
-
-            index + 1,
-
-            entry.points
-
-        );
+            });
 
 
-        leaderboard.appendChild(row);
+    sorted.forEach(
+        function(entry, index) {
 
-    });
+            const row =
+                createPlayerRow(
 
-}
+                    entry.player,
+
+                    index + 1,
+
+                    entry.points
+
+                );
 
 
-/* =====================================================
-   PLAYER PROFILE
-===================================================== */
-
-function showPlayerProfile(playerName) {
-
-    const player = players.find(
-        function(p) {
-
-            return p.name === playerName;
+            leaderboard.appendChild(row);
 
         }
     );
 
+}
+
+
+
+/* PLAYER PROFILE */
+
+function showPlayerProfile(name) {
+
+    const player =
+        players.find(
+            function(p) {
+
+                return p.name === name;
+
+            }
+        );
+
 
     if (!player) {
-
-        console.error(
-            "Player not found:",
-            playerName
-        );
 
         return;
 
     }
 
 
-    /* Hide everything else */
-
     document
-        .getElementById("overallSection")
+        .getElementById(
+            "overallSection"
+        )
         .classList.add("hidden");
 
 
     document
-        .getElementById("modesSection")
+        .getElementById(
+            "modesSection"
+        )
         .classList.add("hidden");
 
 
     document
-        .getElementById("gamemodePage")
+        .getElementById(
+            "gamemodePage"
+        )
         .classList.add("hidden");
 
-
-    /* Show profile */
 
     const profile =
         document.getElementById(
@@ -499,40 +517,39 @@ function showPlayerProfile(playerName) {
         );
 
 
-    profile.classList.remove("hidden");
+    profile.classList.remove(
+        "hidden"
+    );
 
 
     const overall =
         calculateOverall(player);
 
 
-    const overallTier =
+    const tier =
         getTier(overall);
 
 
-    /* CREATE GAMEMODE LIST */
-
-    let modesHTML = "";
+    let modes = "";
 
 
-    Object.keys(gamemodes).forEach(
-        function(modeKey) {
+    Object.keys(gamemodes)
+        .forEach(function(modeKey) {
+
 
             const mode =
                 gamemodes[modeKey];
 
 
             const points =
-                typeof player[modeKey] === "number"
-                    ? player[modeKey]
-                    : 0;
+                player[modeKey] || 0;
 
 
-            const tier =
+            const modeTier =
                 getTier(points);
 
 
-            modesHTML += `
+            modes += `
 
                 <div
                     class="profile-mode"
@@ -547,18 +564,20 @@ function showPlayerProfile(playerName) {
 
                     </div>
 
+
                     <strong>
 
-                        ${points.toLocaleString()}
+                        ${points}
                         pts
 
                     </strong>
 
+
                     <span
-                        class="tier ${tier}"
+                        class="tier ${modeTier}"
                     >
 
-                        ${tier}
+                        ${modeTier}
 
                     </span>
 
@@ -566,22 +585,19 @@ function showPlayerProfile(playerName) {
 
             `;
 
-        }
-    );
+        });
 
-
-    /* PROFILE HTML */
 
     profile.innerHTML = `
 
-        <button
-            id="profileBackButton"
+        <a
+            href="#overallSection"
             class="back-button"
         >
 
             ← Back to Overall
 
-        </button>
+        </a>
 
 
         <div class="profile-card">
@@ -602,18 +618,20 @@ function showPlayerProfile(playerName) {
                     Overall
                 </span>
 
+
                 <strong>
 
-                    ${overall.toLocaleString()}
+                    ${overall}
                     pts
 
                 </strong>
 
+
                 <div
-                    class="tier ${overallTier}"
+                    class="tier ${tier}"
                 >
 
-                    ${overallTier}
+                    ${tier}
 
                 </div>
 
@@ -627,11 +645,16 @@ function showPlayerProfile(playerName) {
             <div>
 
                 <span class="section-small">
+
                     RANKINGS
+
                 </span>
 
+
                 <h2>
+
                     Gamemodes
+
                 </h2>
 
             </div>
@@ -641,45 +664,33 @@ function showPlayerProfile(playerName) {
 
         <div class="profile-modes">
 
-            ${modesHTML}
+            ${modes}
 
         </div>
 
     `;
 
 
-    /* BACK BUTTON */
+    /* CLICK GAMEMODES FROM PROFILE */
 
-    document
-        .getElementById(
-            "profileBackButton"
-        )
-        .addEventListener(
-            "click",
-            showOverall
-        );
-
-
-    /* GAMEMODE BUTTONS IN PROFILE */
-
-    document
+    profile
         .querySelectorAll(
             ".profile-mode"
         )
         .forEach(function(element) {
 
+
             element.addEventListener(
                 "click",
                 function() {
 
-                    const modeKey =
-                        element.dataset.mode;
-
-
-                    showGamemode(modeKey);
+                    showGamemode(
+                        element.dataset.mode
+                    );
 
                 }
             );
+
 
         });
 
@@ -695,92 +706,8 @@ function showPlayerProfile(playerName) {
 }
 
 
-/* =====================================================
-   PAGE BUTTONS
-===================================================== */
 
-function setupNavigation() {
-
-
-    /* OVERALL BUTTON */
-
-    document
-        .getElementById(
-            "overallButton"
-        )
-        .addEventListener(
-            "click",
-            showOverall
-        );
-
-
-    /* GAMEMODES BUTTON */
-
-    document
-        .getElementById(
-            "gamemodesButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                showOverall();
-
-
-                setTimeout(function() {
-
-                    document
-                        .getElementById(
-                            "modesSection"
-                        )
-                        .scrollIntoView({
-
-                            behavior: "smooth"
-
-                        });
-
-                }, 100);
-
-            }
-        );
-
-
-    /* BACK BUTTON */
-
-    document
-        .getElementById(
-            "backButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                showOverall();
-
-
-                setTimeout(function() {
-
-                    document
-                        .getElementById(
-                            "modesSection"
-                        )
-                        .scrollIntoView({
-
-                            behavior: "smooth"
-
-                        });
-
-                }, 100);
-
-            }
-        );
-
-}
-
-
-/* =====================================================
-   START WEBSITE
-===================================================== */
+/* START */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -789,8 +716,6 @@ document.addEventListener(
         renderOverall();
 
         renderGamemodes();
-
-        setupNavigation();
 
     }
 );
