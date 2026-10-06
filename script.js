@@ -1,28 +1,69 @@
 /* =====================================================
-   ABYSSAL TIERS - SCRIPT.JS
-   ===================================================== */
+   ABYSSAL TIERS
+   MAIN SCRIPT
+===================================================== */
 
 
 /* =====================================================
-   1. CALCULATE OVERALL POINTS
-   ===================================================== */
+   GET TIER
+===================================================== */
+
+function getTier(points) {
+
+    if (points >= 950) return "HT1";
+    if (points >= 900) return "LT1";
+
+    if (points >= 850) return "HT2";
+    if (points >= 800) return "LT2";
+
+    if (points >= 750) return "HT3";
+    if (points >= 700) return "LT3";
+
+    if (points >= 650) return "HT4";
+    if (points >= 600) return "LT4";
+
+    if (points >= 550) return "HT5";
+
+    return "LT5";
+}
+
+
+/* =====================================================
+   GET MINECRAFT HEAD
+===================================================== */
+
+function getHead(playerName) {
+
+    return `
+        <img
+            class="head"
+            src="https://mc-heads.net/avatar/${encodeURIComponent(playerName)}/44"
+            alt="${playerName}"
+        >
+    `;
+}
+
+
+/* =====================================================
+   CALCULATE OVERALL
+===================================================== */
 
 function calculateOverall(player) {
 
     let total = 0;
     let count = 0;
 
-    for (const mode of Object.keys(gamemodes)) {
+    Object.keys(gamemodes).forEach(function(mode) {
 
-        const points = player[mode];
+        if (typeof player[mode] === "number") {
 
-        if (typeof points === "number") {
+            total += player[mode];
 
-            total += points;
             count++;
 
         }
-    }
+
+    });
 
     if (count === 0) {
         return 0;
@@ -33,144 +74,72 @@ function calculateOverall(player) {
 
 
 /* =====================================================
-   2. GET TIER FROM POINTS
-   ===================================================== */
-
-function getTier(points) {
-
-    if (points >= 950) {
-        return "HT1";
-    }
-
-    if (points >= 900) {
-        return "LT1";
-    }
-
-    if (points >= 850) {
-        return "HT2";
-    }
-
-    if (points >= 800) {
-        return "LT2";
-    }
-
-    if (points >= 750) {
-        return "HT3";
-    }
-
-    if (points >= 700) {
-        return "LT3";
-    }
-
-    if (points >= 650) {
-        return "HT4";
-    }
-
-    if (points >= 600) {
-        return "LT4";
-    }
-
-    if (points >= 550) {
-        return "HT5";
-    }
-
-    return "LT5";
-}
-
-
-/* =====================================================
-   3. MINECRAFT HEAD
-   ===================================================== */
-
-function getHead(playerName) {
-
-    return `
-        <img
-            class="head"
-            src="https://mc-heads.net/avatar/${encodeURIComponent(playerName)}/44"
-            alt="${playerName}"
-            loading="lazy"
-        >
-    `;
-}
-
-
-/* =====================================================
-   4. CREATE PLAYER ROW
-   ===================================================== */
+   CREATE PLAYER ROW
+===================================================== */
 
 function createPlayerRow(player, position, points) {
 
     const tier = getTier(points);
 
-    return `
+    const row = document.createElement("div");
 
-        <div
-            class="player"
-            onclick="showPlayerProfile('${escapeHTML(player.name)}')"
-            style="cursor: pointer;"
-        >
+    row.className = "player";
 
-            <div class="position">
-                #${position}
+    row.style.cursor = "pointer";
+
+
+    row.innerHTML = `
+
+        <div class="position">
+            #${position}
+        </div>
+
+        ${getHead(player.name)}
+
+        <div class="player-info">
+
+            <div class="player-name">
+                ${player.name}
             </div>
 
-
-            ${getHead(player.name)}
-
-
-            <div class="player-info">
-
-                <div class="player-name">
-                    ${escapeHTML(player.name)}
-                </div>
-
-                <div class="player-rank">
-                    ${tier}
-                </div>
-
-            </div>
-
-
-            <div class="points">
-
-                ${points.toLocaleString()}
-
-                pts
-
-            </div>
-
-
-            <div class="tier ${tier}">
-
+            <div class="player-rank">
                 ${tier}
-
             </div>
 
         </div>
 
+        <div class="points">
+
+            ${points.toLocaleString()}
+            pts
+
+        </div>
+
+        <div class="tier ${tier}">
+
+            ${tier}
+
+        </div>
+
     `;
+
+
+    /* CLICK PLAYER */
+
+    row.addEventListener("click", function() {
+
+        showPlayerProfile(player.name);
+
+    });
+
+
+    return row;
 }
 
 
 /* =====================================================
-   5. ESCAPE HTML
-   ===================================================== */
-
-function escapeHTML(text) {
-
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-/* =====================================================
-   6. SHOW OVERALL
-   ===================================================== */
+   SHOW OVERALL
+===================================================== */
 
 function showOverall() {
 
@@ -190,33 +159,8 @@ function showOverall() {
 
 
     document
-        .getElementById("searchSection")
+        .getElementById("playerProfile")
         .classList.add("hidden");
-
-
-    const profile =
-        document.getElementById("playerProfile");
-
-
-    if (profile) {
-
-        profile.classList.add("hidden");
-
-    }
-
-
-    const searchInput =
-        document.getElementById("searchInput");
-
-
-    if (searchInput) {
-
-        searchInput.value = "";
-
-    }
-
-
-    renderOverall();
 
 
     window.scrollTo({
@@ -226,12 +170,13 @@ function showOverall() {
         behavior: "smooth"
 
     });
+
 }
 
 
 /* =====================================================
-   7. RENDER OVERALL LEADERBOARD
-   ===================================================== */
+   RENDER OVERALL
+===================================================== */
 
 function renderOverall() {
 
@@ -241,67 +186,58 @@ function renderOverall() {
         );
 
 
-    if (!leaderboard) {
-        return;
-    }
+    leaderboard.innerHTML = "";
 
 
     const sortedPlayers = players
+        .map(function(player) {
 
-        .map(player => ({
+            return {
 
-            player: player,
+                player: player,
 
-            points:
-                calculateOverall(player)
+                points:
+                    calculateOverall(player)
 
-        }))
+            };
 
-        .sort((a, b) => {
+        })
+        .sort(function(a, b) {
 
             return b.points - a.points;
 
         });
 
 
-    leaderboard.innerHTML = "";
+    sortedPlayers.forEach(function(entry, index) {
+
+        const row = createPlayerRow(
+
+            entry.player,
+
+            index + 1,
+
+            entry.points
+
+        );
 
 
-    sortedPlayers.forEach((entry, index) => {
-
-        leaderboard.innerHTML +=
-
-            createPlayerRow(
-
-                entry.player,
-
-                index + 1,
-
-                entry.points
-
-            );
+        leaderboard.appendChild(row);
 
     });
 
 
-    const playerCount =
-        document.getElementById(
-            "overallPlayerCount"
-        );
+    document.getElementById(
+        "overallPlayerCount"
+    ).textContent =
+        players.length + " players";
 
-
-    if (playerCount) {
-
-        playerCount.textContent =
-            `${players.length} players`;
-
-    }
 }
 
 
 /* =====================================================
-   8. RENDER GAMEMODE CARDS
-   ===================================================== */
+   RENDER GAMEMODES
+===================================================== */
 
 function renderGamemodes() {
 
@@ -311,18 +247,13 @@ function renderGamemodes() {
         );
 
 
-    if (!grid) {
-        return;
-    }
-
-
     grid.innerHTML = "";
 
 
-    for (const key of Object.keys(gamemodes)) {
+    Object.keys(gamemodes).forEach(function(modeKey) {
 
         const mode =
-            gamemodes[key];
+            gamemodes[modeKey];
 
 
         const card =
@@ -331,13 +262,6 @@ function renderGamemodes() {
 
         card.className =
             "gamemode-card";
-
-
-        card.onclick = function () {
-
-            showGamemode(key);
-
-        };
 
 
         card.innerHTML = `
@@ -350,15 +274,13 @@ function renderGamemodes() {
 
                 </div>
 
-
                 <div class="mode-name">
 
-                    ${escapeHTML(mode.name)}
+                    ${mode.name}
 
                 </div>
 
             </div>
-
 
             <div class="mode-players">
 
@@ -369,15 +291,30 @@ function renderGamemodes() {
         `;
 
 
+        /* IMPORTANT:
+           CLICK PE GAMEMODE
+        */
+
+        card.addEventListener(
+            "click",
+            function() {
+
+                showGamemode(modeKey);
+
+            }
+        );
+
+
         grid.appendChild(card);
 
-    }
+    });
+
 }
 
 
 /* =====================================================
-   9. SHOW GAMEMODE
-   ===================================================== */
+   SHOW GAMEMODE
+===================================================== */
 
 function showGamemode(modeKey) {
 
@@ -386,9 +323,18 @@ function showGamemode(modeKey) {
 
 
     if (!mode) {
+
+        console.error(
+            "Gamemode not found:",
+            modeKey
+        );
+
         return;
+
     }
 
+
+    /* Hide homepage */
 
     document
         .getElementById("overallSection")
@@ -401,33 +347,26 @@ function showGamemode(modeKey) {
 
 
     document
-        .getElementById("searchSection")
+        .getElementById("playerProfile")
         .classList.add("hidden");
 
 
-    const profile =
-        document.getElementById(
-            "playerProfile"
-        );
-
-
-    if (profile) {
-
-        profile.classList.add("hidden");
-
-    }
-
+    /* Show gamemode */
 
     document
         .getElementById("gamemodePage")
         .classList.remove("hidden");
 
 
+    /* Title */
+
     document
         .getElementById("gamemodeTitle")
         .textContent =
         mode.name;
 
+
+    /* Description */
 
     document
         .getElementById("gamemodeDescription")
@@ -445,12 +384,13 @@ function showGamemode(modeKey) {
         behavior: "smooth"
 
     });
+
 }
 
 
 /* =====================================================
-   10. RENDER GAMEMODE LEADERBOARD
-   ===================================================== */
+   RENDER GAMEMODE
+===================================================== */
 
 function renderGamemode(modeKey) {
 
@@ -460,66 +400,66 @@ function renderGamemode(modeKey) {
         );
 
 
-    if (!leaderboard) {
-        return;
-    }
+    leaderboard.innerHTML = "";
 
 
     const sortedPlayers = players
 
-        .map(player => ({
+        .map(function(player) {
 
-            player: player,
+            return {
 
-            points:
-                typeof player[modeKey] === "number"
-                    ? player[modeKey]
-                    : 0
+                player: player,
 
-        }))
+                points:
+                    typeof player[modeKey] === "number"
+                        ? player[modeKey]
+                        : 0
 
-        .sort((a, b) => {
+            };
+
+        })
+
+        .sort(function(a, b) {
 
             return b.points - a.points;
 
         });
 
 
-    leaderboard.innerHTML = "";
+    sortedPlayers.forEach(function(entry, index) {
+
+        const row = createPlayerRow(
+
+            entry.player,
+
+            index + 1,
+
+            entry.points
+
+        );
 
 
-    sortedPlayers.forEach((entry, index) => {
-
-        leaderboard.innerHTML +=
-
-            createPlayerRow(
-
-                entry.player,
-
-                index + 1,
-
-                entry.points
-
-            );
+        leaderboard.appendChild(row);
 
     });
+
 }
 
 
 /* =====================================================
-   11. PLAYER PROFILE
-   ===================================================== */
+   PLAYER PROFILE
+===================================================== */
 
 function showPlayerProfile(playerName) {
 
-    const player =
-        players.find(
+    const player = players.find(
+        function(p) {
 
-            p =>
-                p.name.toLowerCase() ===
-                playerName.toLowerCase()
+            return p.name === playerName;
 
-        );
+        }
+    );
 
 
     if (!player) {
@@ -534,7 +474,7 @@ function showPlayerProfile(playerName) {
     }
 
 
-    /* Hide other pages */
+    /* Hide everything else */
 
     document
         .getElementById("overallSection")
@@ -551,38 +491,16 @@ function showPlayerProfile(playerName) {
         .classList.add("hidden");
 
 
-    document
-        .getElementById("searchSection")
-        .classList.add("hidden");
+    /* Show profile */
 
-
-    /* Create profile section if it doesn't exist */
-
-    let profile =
+    const profile =
         document.getElementById(
             "playerProfile"
         );
 
 
-    if (!profile) {
-
-        profile =
-            document.createElement("section");
-
-        profile.id =
-            "playerProfile";
-
-        document
-            .querySelector("main")
-            .appendChild(profile);
-
-    }
-
-
     profile.classList.remove("hidden");
 
-
-    /* Overall */
 
     const overall =
         calculateOverall(player);
@@ -592,77 +510,73 @@ function showPlayerProfile(playerName) {
         getTier(overall);
 
 
-    /* Gamemode rows */
+    /* CREATE GAMEMODE LIST */
 
     let modesHTML = "";
 
 
-    for (
-        const modeKey
-        of Object.keys(gamemodes)
-    ) {
+    Object.keys(gamemodes).forEach(
+        function(modeKey) {
 
-        const mode =
-            gamemodes[modeKey];
+            const mode =
+                gamemodes[modeKey];
 
 
-        const points =
-            typeof player[modeKey] === "number"
-                ? player[modeKey]
-                : 0;
+            const points =
+                typeof player[modeKey] === "number"
+                    ? player[modeKey]
+                    : 0;
 
 
-        const tier =
-            getTier(points);
+            const tier =
+                getTier(points);
 
 
-        modesHTML += `
+            modesHTML += `
 
-            <div
-                class="profile-mode"
-                onclick="showGamemode('${modeKey}')"
-                style="cursor: pointer;"
-            >
+                <div
+                    class="profile-mode"
+                    data-mode="${modeKey}"
+                >
 
-                <div>
+                    <div>
 
-                    ${mode.icon}
+                        ${mode.icon}
 
-                    ${escapeHTML(mode.name)}
+                        ${mode.name}
+
+                    </div>
+
+                    <strong>
+
+                        ${points.toLocaleString()}
+                        pts
+
+                    </strong>
+
+                    <span
+                        class="tier ${tier}"
+                    >
+
+                        ${tier}
+
+                    </span>
 
                 </div>
 
+            `;
 
-                <strong>
-
-                    ${points.toLocaleString()}
-                    pts
-
-                </strong>
+        }
+    );
 
 
-                <span
-                    class="tier ${tier}"
-                >
-
-                    ${tier}
-
-                </span>
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* Create profile */
+    /* PROFILE HTML */
 
     profile.innerHTML = `
 
         <button
+            id="profileBackButton"
             class="back-button"
-            onclick="showOverall()"
         >
 
             ← Back to Overall
@@ -672,24 +586,21 @@ function showPlayerProfile(playerName) {
 
         <div class="profile-card">
 
-
             ${getHead(player.name)}
 
 
             <h2>
 
-                ${escapeHTML(player.name)}
+                ${player.name}
 
             </h2>
 
 
             <div class="profile-overall">
 
-
                 <span>
                     Overall
                 </span>
-
 
                 <strong>
 
@@ -697,7 +608,6 @@ function showPlayerProfile(playerName) {
                     pts
 
                 </strong>
-
 
                 <div
                     class="tier ${overallTier}"
@@ -707,9 +617,7 @@ function showPlayerProfile(playerName) {
 
                 </div>
 
-
             </div>
-
 
         </div>
 
@@ -719,16 +627,11 @@ function showPlayerProfile(playerName) {
             <div>
 
                 <span class="section-small">
-
                     RANKINGS
-
                 </span>
 
-
                 <h2>
-
                     Gamemodes
-
                 </h2>
 
             </div>
@@ -745,6 +648,42 @@ function showPlayerProfile(playerName) {
     `;
 
 
+    /* BACK BUTTON */
+
+    document
+        .getElementById(
+            "profileBackButton"
+        )
+        .addEventListener(
+            "click",
+            showOverall
+        );
+
+
+    /* GAMEMODE BUTTONS IN PROFILE */
+
+    document
+        .querySelectorAll(
+            ".profile-mode"
+        )
+        .forEach(function(element) {
+
+            element.addEventListener(
+                "click",
+                function() {
+
+                    const modeKey =
+                        element.dataset.mode;
+
+
+                    showGamemode(modeKey);
+
+                }
+            );
+
+        });
+
+
     window.scrollTo({
 
         top: 0,
@@ -752,223 +691,106 @@ function showPlayerProfile(playerName) {
         behavior: "smooth"
 
     });
-}
-
-
-/* =====================================================
-   12. SEARCH PLAYER
-   ===================================================== */
-
-function searchPlayer() {
-
-    const inputElement =
-        document.getElementById(
-            "searchInput"
-        );
-
-
-    if (!inputElement) {
-        return;
-    }
-
-
-    const input =
-        inputElement.value
-            .toLowerCase()
-            .trim();
-
-
-    /* Empty search */
-
-    if (!input) {
-
-        showOverall();
-
-        return;
-
-    }
-
-
-    /* Hide other pages */
-
-    document
-        .getElementById("overallSection")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("modesSection")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("gamemodePage")
-        .classList.add("hidden");
-
-
-    const profile =
-        document.getElementById(
-            "playerProfile"
-        );
-
-
-    if (profile) {
-
-        profile.classList.add("hidden");
-
-    }
-
-
-    document
-        .getElementById("searchSection")
-        .classList.remove("hidden");
-
-
-    /* Find players */
-
-    const foundPlayers =
-        players.filter(player =>
-
-            player.name
-                .toLowerCase()
-                .includes(input)
-
-        );
-
-
-    const results =
-        document.getElementById(
-            "searchResults"
-        );
-
-
-    results.innerHTML = "";
-
-
-    /* No players */
-
-    if (foundPlayers.length === 0) {
-
-        results.innerHTML = `
-
-            <div class="player">
-
-                <div class="player-info">
-
-                    <div class="player-name">
-
-                        No players found.
-
-                    </div>
-
-                    <div class="player-rank">
-
-                        Try another username.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        return;
-
-    }
-
-
-    /* Results */
-
-    foundPlayers.forEach(player => {
-
-        const points =
-            calculateOverall(player);
-
-
-        results.innerHTML +=
-
-            createPlayerRow(
-
-                player,
-
-                "-",
-
-                points
-
-            );
-
-    });
 
 }
 
 
 /* =====================================================
-   13. SCROLL TO GAMEMODES
-   ===================================================== */
+   PAGE BUTTONS
+===================================================== */
 
-function scrollToModes() {
+function setupNavigation() {
 
-    const modes =
-        document.getElementById(
-            "modesSection"
+
+    /* OVERALL BUTTON */
+
+    document
+        .getElementById(
+            "overallButton"
+        )
+        .addEventListener(
+            "click",
+            showOverall
         );
 
 
-    if (!modes) {
-        return;
-    }
-
-
-    /* Make sure Overall page is visible */
+    /* GAMEMODES BUTTON */
 
     document
-        .getElementById("overallSection")
-        .classList.remove("hidden");
+        .getElementById(
+            "gamemodesButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showOverall();
 
 
-    modes.classList.remove("hidden");
+                setTimeout(function() {
 
+                    document
+                        .getElementById(
+                            "modesSection"
+                        )
+                        .scrollIntoView({
 
-    document
-        .getElementById("gamemodePage")
-        .classList.add("hidden");
+                            behavior: "smooth"
 
+                        });
 
-    const profile =
-        document.getElementById(
-            "playerProfile"
+                }, 100);
+
+            }
         );
 
 
-    if (profile) {
+    /* BACK BUTTON */
 
-        profile.classList.add("hidden");
+    document
+        .getElementById(
+            "backButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
 
-    }
+                showOverall();
 
 
-    modes.scrollIntoView({
+                setTimeout(function() {
 
-        behavior: "smooth"
+                    document
+                        .getElementById(
+                            "modesSection"
+                        )
+                        .scrollIntoView({
 
-    });
+                            behavior: "smooth"
+
+                        });
+
+                }, 100);
+
+            }
+        );
 
 }
 
 
 /* =====================================================
-   14. INITIALIZE WEBSITE
-   ===================================================== */
+   START WEBSITE
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function() {
 
         renderOverall();
 
         renderGamemodes();
+
+        setupNavigation();
 
     }
 );
