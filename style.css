@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-
 * {
     box-sizing: border-box;
 }
@@ -12,19 +9,20 @@ html {
 
 
 body {
+
     margin: 0;
 
-    background:
-        #07080d;
+    background: #07080d;
 
     color: white;
 
     font-family:
-        "Inter",
         Arial,
+        Helvetica,
         sans-serif;
 
     min-height: 100vh;
+
 }
 
 
@@ -33,65 +31,35 @@ body {
 ========================= */
 
 .background {
+
     position: fixed;
 
     inset: 0;
 
-    z-index: -5;
+    z-index: -1;
 
     background:
+
         radial-gradient(
             circle at 20% 10%,
-            rgba(105, 45, 255, 0.20),
+            rgba(115, 65, 255, 0.20),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 80% 20%,
-            rgba(0, 180, 255, 0.13),
+            rgba(0, 170, 255, 0.12),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 50% 90%,
-            rgba(140, 30, 255, 0.12),
+            rgba(130, 30, 255, 0.12),
             transparent 35%
         ),
 
         #07080d;
-}
 
-
-.background::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    opacity: 0.18;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,0.025) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.025) 1px,
-            transparent 1px
-        );
-
-    background-size: 60px 60px;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent
-        );
 }
 
 
@@ -107,24 +75,25 @@ body {
 
     z-index: 100;
 
-    height: 76px;
+    height: 75px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 40px;
+    gap: 50px;
 
     padding: 0 6%;
 
     background:
-        rgba(7, 8, 13, 0.88);
+        rgba(7, 8, 13, 0.92);
 
     backdrop-filter:
-        blur(18px);
+        blur(15px);
 
     border-bottom:
         1px solid rgba(255,255,255,0.06);
+
 }
 
 
@@ -134,105 +103,68 @@ body {
 
     flex-direction: column;
 
-    line-height: 0.9;
-
-    min-width: 150px;
 }
 
 
 .logo-main {
 
-    font-size: 20px;
+    font-size: 21px;
 
-    font-weight: 800;
+    font-weight: 900;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+
 }
 
 
 .logo-sub {
 
-    font-size: 11px;
+    color: #8b6cff;
 
-    color: #8c6cff;
+    font-size: 10px;
 
-    letter-spacing: 5px;
+    letter-spacing: 6px;
 
-    margin-top: 5px;
+    margin-top: 4px;
+
 }
 
 
-.nav-links {
+nav {
 
     display: flex;
 
     gap: 8px;
 
-    flex: 1;
 }
 
 
-.nav-button {
+nav a {
 
-    background: transparent;
+    color: #858894;
 
-    border: 0;
+    text-decoration: none;
 
-    color: #858796;
-
-    padding: 10px 18px;
+    padding: 11px 18px;
 
     border-radius: 8px;
 
-    cursor: pointer;
+    font-weight: 700;
 
     font-size: 14px;
 
-    font-weight: 600;
-
     transition: 0.2s;
+
 }
 
 
-.nav-button:hover,
-.nav-button.active {
+nav a:hover {
 
     color: white;
 
     background:
         rgba(255,255,255,0.07);
-}
 
-
-.search-container input {
-
-    width: 220px;
-
-    background:
-        rgba(255,255,255,0.05);
-
-    border:
-        1px solid rgba(255,255,255,0.08);
-
-    outline: none;
-
-    color: white;
-
-    padding: 11px 15px;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-}
-
-
-.search-container input:focus {
-
-    border-color:
-        rgba(140,108,255,0.7);
-
-    box-shadow:
-        0 0 20px rgba(140,108,255,0.12);
 }
 
 
@@ -248,7 +180,6 @@ main {
 
     margin: auto;
 
-    padding-bottom: 100px;
 }
 
 
@@ -264,86 +195,53 @@ main {
 
     align-items: center;
 
-    position: relative;
-}
-
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 420px;
-
-    height: 420px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(122,78,255,0.25),
-            transparent 70%
-        );
-
-    left: 50%;
-
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    filter: blur(20px);
-
-    z-index: -1;
 }
 
 
 .small-title,
 .section-small {
 
-    color: #8f75ff;
+    color: #947cff;
 
     font-size: 11px;
 
-    font-weight: 800;
+    font-weight: 900;
 
     letter-spacing: 3px;
 
-    text-transform: uppercase;
 }
 
 
 .hero h1 {
 
     font-size:
-        clamp(50px, 8vw, 88px);
+        clamp(55px, 8vw, 90px);
 
-    margin: 15px 0;
+    line-height: 0.95;
 
     letter-spacing: -5px;
 
-    line-height: 0.95;
+    margin: 15px 0;
+
 }
 
 
 .hero h1 span {
 
-    color: #8b6cff;
+    color: #8c6cff;
 
     text-shadow:
-        0 0 40px rgba(139,108,255,0.4);
+        0 0 40px rgba(140,108,255,0.4);
+
 }
 
 
 .hero p {
 
-    color: #858796;
+    color: #777b89;
 
     font-size: 16px;
 
-    max-width: 550px;
-
-    line-height: 1.7;
 }
 
 
@@ -353,7 +251,10 @@ main {
 
 section {
 
-    margin-top: 70px;
+    margin-top: 65px;
+
+    scroll-margin-top: 100px;
+
 }
 
 
@@ -361,11 +262,12 @@ section {
 
     display: flex;
 
-    align-items: end;
-
     justify-content: space-between;
 
+    align-items: end;
+
     margin-bottom: 20px;
+
 }
 
 
@@ -373,23 +275,22 @@ section {
 
     font-size: 30px;
 
-    margin:
-        7px 0 0;
+    margin: 8px 0 0;
 
-    letter-spacing: -1px;
 }
 
 
 .player-count {
 
-    color: #6f7280;
+    color: #666b79;
 
     font-size: 13px;
+
 }
 
 
 /* =========================
-   LEADERBOARD
+   PLAYERS
 ========================= */
 
 .leaderboard {
@@ -399,86 +300,61 @@ section {
     flex-direction: column;
 
     gap: 8px;
+
 }
 
 
 .player {
 
-    min-height: 76px;
-
     display: flex;
 
     align-items: center;
 
-    gap: 18px;
+    gap: 17px;
+
+    min-height: 76px;
 
     padding: 10px 18px;
 
-    border:
-        1px solid rgba(255,255,255,0.055);
-
     background:
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.045),
-            rgba(255,255,255,0.018)
-        );
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid rgba(255,255,255,0.06);
 
     border-radius: 10px;
 
-    transition:
-        0.2s ease;
+    transition: 0.2s;
+
 }
 
 
 .player:hover {
 
     transform:
-        translateX(4px);
-
-    border-color:
-        rgba(139,108,255,0.35);
+        translateX(5px);
 
     background:
-        rgba(139,108,255,0.07);
+        rgba(140,108,255,0.08);
+
+    border-color:
+        rgba(140,108,255,0.35);
+
 }
 
 
 .position {
 
-    width: 42px;
+    width: 40px;
 
     text-align: center;
 
     color: #777b89;
 
-    font-size: 14px;
+    font-weight: 800;
 
-    font-weight: 700;
 }
 
-
-.player:nth-child(1) .position {
-
-    color: #ffd95a;
-
-    font-size: 17px;
-}
-
-
-.player:nth-child(2) .position {
-
-    color: #bfc6d1;
-}
-
-
-.player:nth-child(3) .position {
-
-    color: #d99462;
-}
-
-
-/* MINECRAFT HEAD */
 
 .head {
 
@@ -486,14 +362,10 @@ section {
 
     height: 44px;
 
-    image-rendering: pixelated;
-
     border-radius: 5px;
 
-    background: #181a23;
+    image-rendering: pixelated;
 
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.3);
 }
 
 
@@ -501,31 +373,26 @@ section {
 
     flex: 1;
 
-    min-width: 0;
 }
 
 
 .player-name {
 
+    font-weight: 800;
+
     font-size: 15px;
 
-    font-weight: 700;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 
 .player-rank {
 
-    color: #777b89;
+    color: #686d7b;
 
     font-size: 11px;
 
     margin-top: 4px;
+
 }
 
 
@@ -533,11 +400,12 @@ section {
 
     color: #999dab;
 
-    font-size: 13px;
-
-    min-width: 100px;
+    min-width: 90px;
 
     text-align: right;
+
+    font-size: 13px;
+
 }
 
 
@@ -553,7 +421,8 @@ section {
 
     font-size: 11px;
 
-    font-weight: 800;
+    font-weight: 900;
+
 }
 
 
@@ -562,135 +431,43 @@ section {
 ========================= */
 
 .HT1 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4545,
-            #a90e0e
-        );
-
-    box-shadow:
-        0 0 18px rgba(255,50,50,0.18);
+    background: #d83232;
 }
-
 
 .LT1 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff6868,
-            #b52d2d
-        );
+    background: #ee5555;
 }
-
 
 .HT2 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff9e3d,
-            #c75b00
-        );
+    background: #d97916;
 }
-
 
 .LT2 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffc35c,
-            #bd7900
-        );
+    background: #e9a832;
 }
-
 
 .HT3 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #4da7ff,
-            #1c55bd
-        );
+    background: #2877d8;
 }
-
 
 .LT3 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #70c0ff,
-            #2876bd
-        );
+    background: #4798ed;
 }
-
 
 .HT4 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #51d86a,
-            #178c31
-        );
+    background: #279947;
 }
-
 
 .LT4 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #72dc82,
-            #278d39
-        );
+    background: #46b864;
 }
-
 
 .HT5 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #999,
-            #555
-        );
+    background: #777;
 }
 
-
 .LT5 {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #777,
-            #3f3f3f
-        );
+    background: #555;
 }
 
 
@@ -706,12 +483,11 @@ section {
         repeat(4, 1fr);
 
     gap: 12px;
+
 }
 
 
 .gamemode-card {
-
-    position: relative;
 
     min-height: 125px;
 
@@ -725,45 +501,20 @@ section {
 
     cursor: pointer;
 
-    overflow: hidden;
-
-    border-radius: 12px;
-
     border:
         1px solid rgba(255,255,255,0.06);
+
+    border-radius: 12px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.065),
+            rgba(255,255,255,0.06),
             rgba(255,255,255,0.015)
         );
 
-    transition:
-        0.25s ease;
-}
+    transition: 0.2s;
 
-
-.gamemode-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 100px;
-
-    height: 100px;
-
-    right: -30px;
-
-    bottom: -40px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139,108,255,0.25),
-            transparent 70%
-        );
 }
 
 
@@ -773,18 +524,20 @@ section {
         translateY(-5px);
 
     border-color:
-        rgba(139,108,255,0.4);
+        rgba(140,108,255,0.5);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,0.25);
+        0 15px 40px
+        rgba(0,0,0,0.3);
+
 }
 
 
 .mode-icon {
 
-    width: 36px;
+    width: 38px;
 
-    height: 36px;
+    height: 38px;
 
     display: flex;
 
@@ -792,73 +545,46 @@ section {
 
     justify-content: center;
 
+    background:
+        rgba(140,108,255,0.13);
+
+    color: #a18cff;
+
     border-radius: 9px;
 
-    background:
-        rgba(139,108,255,0.12);
+    font-weight: 900;
 
-    color: #9c85ff;
-
-    font-size: 17px;
-
-    font-weight: 800;
 }
 
 
 .mode-name {
 
+    margin-top: 15px;
+
     font-size: 14px;
 
-    font-weight: 700;
+    font-weight: 800;
 
-    margin-top: 15px;
 }
 
 
 .mode-players {
 
-    color: #686c79;
+    color: #666b79;
 
     font-size: 11px;
+
 }
 
 
 /* =========================
-   GAME PAGE
+   GAMEMODE PAGE
 ========================= */
-
-.back-button {
-
-    background:
-        rgba(255,255,255,0.05);
-
-    color: #aaa;
-
-    border:
-        1px solid rgba(255,255,255,0.08);
-
-    padding: 10px 16px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    margin-bottom: 30px;
-}
-
-
-.back-button:hover {
-
-    color: white;
-
-    background:
-        rgba(255,255,255,0.09);
-}
-
 
 .gamemode-header {
 
     margin-bottom: 25px;
+
 }
 
 
@@ -867,12 +593,155 @@ section {
     font-size: 42px;
 
     margin: 8px 0;
+
 }
 
 
 .gamemode-header p {
 
-    color: #777b89;
+    color: #737785;
+
+}
+
+
+.back-button {
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: #aaa;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.back-button:hover {
+
+    color: white;
+
+    background:
+        rgba(255,255,255,0.1);
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-card {
+
+    text-align: center;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(140,108,255,0.12),
+            rgba(255,255,255,0.03)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.07);
+
+    border-radius: 15px;
+
+}
+
+
+.profile-card .head {
+
+    width: 96px;
+
+    height: 96px;
+
+}
+
+
+.profile-card h2 {
+
+    font-size: 32px;
+
+    margin: 15px 0 25px;
+
+}
+
+
+.profile-overall {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+}
+
+
+.profile-modes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+}
+
+
+.profile-mode {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px;
+
+    background:
+        rgba(255,255,255,0.04);
+
+    border:
+        1px solid rgba(255,255,255,0.06);
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+}
+
+
+.profile-mode:hover {
+
+    background:
+        rgba(140,108,255,0.08);
+
+}
+
+
+.profile-mode div {
+
+    flex: 1;
+
+    font-weight: 700;
+
 }
 
 
@@ -883,6 +752,7 @@ section {
 .hidden {
 
     display: none !important;
+
 }
 
 
@@ -892,26 +762,28 @@ section {
 
 footer {
 
+    margin-top: 100px;
+
     padding: 35px 6%;
 
     border-top:
         1px solid rgba(255,255,255,0.06);
 
-    color: #777b89;
-
     display: flex;
 
     justify-content: space-between;
 
+    color: #707482;
+
     font-size: 12px;
+
 }
 
 
-footer div {
+footer strong {
 
     color: white;
 
-    font-weight: 700;
 }
 
 
@@ -925,6 +797,7 @@ footer div {
 
         grid-template-columns:
             repeat(3, 1fr);
+
     }
 
 }
@@ -934,57 +807,26 @@ footer div {
 
     .navbar {
 
-        height: auto;
-
         padding: 15px;
+
+        height: auto;
 
         flex-wrap: wrap;
 
-        gap: 12px;
     }
 
 
-    .logo {
-
-        min-width: auto;
-    }
-
-
-    .nav-links {
-
-        order: 3;
+    nav {
 
         width: 100%;
-    }
 
-
-    .search-container {
-
-        margin-left: auto;
-    }
-
-
-    .search-container input {
-
-        width: 150px;
     }
 
 
     main {
 
         width: 94%;
-    }
 
-
-    .hero {
-
-        min-height: 300px;
-    }
-
-
-    .hero h1 {
-
-        font-size: 55px;
     }
 
 
@@ -992,36 +834,21 @@ footer div {
 
         grid-template-columns:
             repeat(2, 1fr);
+
     }
 
 
     .points {
 
         display: none;
+
     }
 
 
-    .player {
+    .profile-modes {
 
-        gap: 10px;
+        grid-template-columns: 1fr;
 
-        padding: 9px;
-    }
-
-
-    .head {
-
-        width: 38px;
-
-        height: 38px;
-    }
-
-
-    .tier {
-
-        min-width: 52px;
-
-        padding: 7px 5px;
     }
 
 
@@ -1030,17 +857,7 @@ footer div {
         flex-direction: column;
 
         gap: 10px;
-    }
 
-}
-
-
-@media (max-width: 400px) {
-
-    .gamemode-grid {
-
-        grid-template-columns:
-            1fr;
     }
 
 }
