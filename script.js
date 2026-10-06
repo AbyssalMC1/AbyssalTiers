@@ -97,17 +97,15 @@ function getHead(playerName) {
    PLAYER ROW
 ========================================= */
 
-function createPlayerRow(
-    player,
-    position,
-    points
-) {
+function createPlayerRow(player, position, points) {
 
     const tier = getTier(points);
 
     return `
 
-        <div class="player">
+        <div class="player"
+             onclick="showPlayerProfile('${player.name}')"
+             style="cursor: pointer;">
 
             <div class="position">
                 #${position}
@@ -128,59 +126,17 @@ function createPlayerRow(
             </div>
 
             <div class="points">
-
-                ${points.toLocaleString()}
-                pts
-
+                ${points.toLocaleString()} pts
             </div>
 
             <div class="tier ${tier}">
-
                 ${tier}
-
             </div>
 
         </div>
 
     `;
 }
-
-
-/* =========================================
-   OVERALL
-========================================= */
-
-function showOverall() {
-
-    document
-        .getElementById("overallSection")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("modesSection")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("gamemodePage")
-        .classList.add("hidden");
-
-    document
-        .getElementById("searchSection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("searchInput")
-        .value = "";
-
-    renderOverall();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
 /* =========================================
    RENDER OVERALL
 ========================================= */
@@ -491,6 +447,123 @@ function searchPlayer() {
 
     }
 
+}
+function showPlayerProfile(playerName) {
+
+    const player = players.find(
+        p => p.name === playerName
+    );
+
+    if (!player) return;
+
+    const overall = calculateOverall(player);
+    const overallTier = getTier(overall);
+
+    document.getElementById("overallSection")
+        .classList.add("hidden");
+
+    document.getElementById("modesSection")
+        .classList.add("hidden");
+
+    document.getElementById("gamemodePage")
+        .classList.add("hidden");
+
+    document.getElementById("searchSection")
+        .classList.add("hidden");
+
+    let profile = document.getElementById("playerProfile");
+
+    if (!profile) {
+
+        profile = document.createElement("section");
+
+        profile.id = "playerProfile";
+
+        document.querySelector("main")
+            .appendChild(profile);
+    }
+
+    profile.classList.remove("hidden");
+
+    let modesHTML = "";
+
+    for (const modeKey of Object.keys(gamemodes)) {
+
+        const mode = gamemodes[modeKey];
+
+        const points = player[modeKey] || 0;
+
+        const tier = getTier(points);
+
+        modesHTML += `
+
+            <div class="profile-mode">
+
+                <div>
+                    ${mode.icon}
+                    ${mode.name}
+                </div>
+
+                <strong>
+                    ${points} pts
+                </strong>
+
+                <span class="tier ${tier}">
+                    ${tier}
+                </span>
+
+            </div>
+
+        `;
+    }
+
+    profile.innerHTML = `
+
+        <button class="back-button"
+                onclick="showOverall()">
+
+            ← Back to Overall
+
+        </button>
+
+        <div class="profile-card">
+
+            ${getHead(player.name)}
+
+            <h2>
+                ${player.name}
+            </h2>
+
+            <div class="profile-overall">
+
+                <span>
+                    Overall
+                </span>
+
+                <strong>
+                    ${overall} pts
+                </strong>
+
+                <div class="tier ${overallTier}">
+                    ${overallTier}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profile-modes">
+
+            ${modesHTML}
+
+        </div>
+
+    `;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
