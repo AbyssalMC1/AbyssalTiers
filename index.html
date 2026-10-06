@@ -3,9 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Abyssal Tiers</title>
 
@@ -14,215 +12,184 @@
 
 <body>
 
-    <!-- BACKGROUND -->
+<div class="background"></div>
 
-    <div class="background"></div>
+<header class="navbar">
 
-    <!-- NAVBAR -->
+    <div class="logo">
+        <span class="logo-main">ABYSSAL</span>
+        <span class="logo-sub">TIERS</span>
+    </div>
 
-    <header class="navbar">
+    <div class="nav-links">
 
-        <div class="logo">
-            <span class="logo-main">ABYSSAL</span>
-            <span class="logo-sub">TIERS</span>
+        <button id="overallButton" class="nav-button active">
+            Overall
+        </button>
+
+        <button id="gamemodesButton" class="nav-button">
+            Gamemodes
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div>
+
+            <div class="small-title">
+                MINECRAFT PVP RANKINGS
+            </div>
+
+            <h1>
+                Abyssal
+                <span>Tiers</span>
+            </h1>
+
+            <p>
+                Competitive Minecraft PvP rankings,
+                created by the community.
+            </p>
+
         </div>
 
-        <div class="nav-links">
-
-            <button class="nav-button active"
-                    onclick="showOverall()">
-                Overall
-            </button>
-
-            <button class="nav-button"
-                    onclick="scrollToModes()">
-                Gamemodes
-            </button>
-
-        </div>
-
-        <div class="search-container">
-
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Search player..."
-                oninput="searchPlayer()"
-            >
-
-        </div>
-
-    </header>
+    </section>
 
 
-    <!-- MAIN -->
+    <!-- OVERALL -->
 
-    <main>
+    <section id="overallSection">
 
-        <section class="hero">
+        <div class="section-title">
 
             <div>
 
-                <div class="small-title">
-                    MINECRAFT PVP RANKINGS
-                </div>
+                <span class="section-small">
+                    RANKINGS
+                </span>
 
-                <h1>
-                    Abyssal
-                    <span>Tiers</span>
-                </h1>
-
-                <p>
-                    Competitive Minecraft PvP rankings,
-                    created by the community.
-                </p>
+                <h2>
+                    Overall
+                </h2>
 
             </div>
 
-        </section>
-
-
-        <!-- OVERALL -->
-
-        <section id="overallSection">
-
-            <div class="section-title">
-
-                <div>
-                    <span class="section-small">
-                        RANKINGS
-                    </span>
-
-                    <h2>
-                        Overall
-                    </h2>
-                </div>
-
-                <div class="player-count"
-                     id="overallPlayerCount">
-                </div>
-
+            <div
+                id="overallPlayerCount"
+                class="player-count">
             </div>
 
-            <div id="overallLeaderboard"
-                 class="leaderboard">
-            </div>
-
-        </section>
-
-
-        <!-- GAMEMODES -->
-
-        <section id="modesSection">
-
-            <div class="section-title">
-
-                <div>
-
-                    <span class="section-small">
-                        GAME MODES
-                    </span>
-
-                    <h2>
-                        PvP Gamemodes
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div id="gamemodeGrid"
-                 class="gamemode-grid">
-            </div>
-
-        </section>
-
-
-        <!-- GAMEMODE PAGE -->
-
-        <section id="gamemodePage"
-                 class="hidden">
-
-            <button class="back-button"
-                    onclick="showOverall()">
-
-                ← Back to Overall
-
-            </button>
-
-            <div class="gamemode-header">
-
-                <div>
-
-                    <span class="section-small">
-                        GAMEMODE
-                    </span>
-
-                    <h2 id="gamemodeTitle">
-                        Sword
-                    </h2>
-
-                    <p id="gamemodeDescription">
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div id="gamemodeLeaderboard"
-                 class="leaderboard">
-            </div>
-
-        </section>
-
-
-        <!-- SEARCH RESULTS -->
-
-        <section id="searchSection"
-                 class="hidden">
-
-            <div class="section-title">
-
-                <div>
-
-                    <span class="section-small">
-                        SEARCH
-                    </span>
-
-                    <h2>
-                        Players
-                    </h2>
-
-                </div>
-
-            </div>
-
-            <div id="searchResults"
-                 class="leaderboard">
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <div>
-            Abyssal Tiers
         </div>
 
-        <span>
-            Custom Minecraft PvP Rankings
-        </span>
 
-    </footer>
+        <div
+            id="overallLeaderboard"
+            class="leaderboard">
+        </div>
+
+    </section>
 
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+    <!-- GAMEMODES -->
+
+    <section id="modesSection">
+
+        <div class="section-title">
+
+            <div>
+
+                <span class="section-small">
+                    GAME MODES
+                </span>
+
+                <h2>
+                    PvP Gamemodes
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="gamemodeGrid"
+            class="gamemode-grid">
+        </div>
+
+    </section>
+
+
+    <!-- GAMEMODE PAGE -->
+
+    <section
+        id="gamemodePage"
+        class="hidden">
+
+        <button
+            id="backButton"
+            class="back-button">
+
+            ← Back to Gamemodes
+
+        </button>
+
+
+        <div class="gamemode-header">
+
+            <span class="section-small">
+                GAMEMODE
+            </span>
+
+            <h2 id="gamemodeTitle">
+                Sword
+            </h2>
+
+            <p id="gamemodeDescription">
+            </p>
+
+        </div>
+
+
+        <div
+            id="gamemodeLeaderboard"
+            class="leaderboard">
+        </div>
+
+    </section>
+
+
+    <!-- PLAYER PROFILE -->
+
+    <section
+        id="playerProfile"
+        class="hidden">
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div>
+        Abyssal Tiers
+    </div>
+
+    <span>
+        Custom Minecraft PvP Rankings
+    </span>
+
+</footer>
+
+
+<script src="data.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
