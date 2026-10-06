@@ -2,41 +2,58 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Abyssal Tiers</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="style.css">
+
 </head>
+
 
 <body>
 
 <div class="background"></div>
 
+
 <header class="navbar">
 
     <div class="logo">
-        <span class="logo-main">ABYSSAL</span>
-        <span class="logo-sub">TIERS</span>
+
+        <span class="logo-main">
+            ABYSSAL
+        </span>
+
+        <span class="logo-sub">
+            TIERS
+        </span>
+
     </div>
 
-    <div class="nav-links">
 
-        <button id="overallButton" class="nav-button active">
+    <nav>
+
+        <a href="#overallSection">
             Overall
-        </button>
+        </a>
 
-        <button id="gamemodesButton" class="nav-button">
+        <a href="#modesSection">
             Gamemodes
-        </button>
+        </a>
 
-    </div>
+    </nav>
 
 </header>
 
 
+
 <main>
+
 
     <!-- HERO -->
 
@@ -54,13 +71,13 @@
             </h1>
 
             <p>
-                Competitive Minecraft PvP rankings,
-                created by the community.
+                Custom Minecraft PvP rankings.
             </p>
 
         </div>
 
     </section>
+
 
 
     <!-- OVERALL -->
@@ -97,6 +114,7 @@
     </section>
 
 
+
     <!-- GAMEMODES -->
 
     <section id="modesSection">
@@ -126,19 +144,20 @@
     </section>
 
 
+
     <!-- GAMEMODE PAGE -->
 
     <section
         id="gamemodePage"
         class="hidden">
 
-        <button
-            id="backButton"
+        <a
+            href="#modesSection"
             class="back-button">
 
             ← Back to Gamemodes
 
-        </button>
+        </a>
 
 
         <div class="gamemode-header">
@@ -165,6 +184,7 @@
     </section>
 
 
+
     <!-- PLAYER PROFILE -->
 
     <section
@@ -172,14 +192,16 @@
         class="hidden">
     </section>
 
+
 </main>
+
 
 
 <footer>
 
-    <div>
+    <strong>
         Abyssal Tiers
-    </div>
+    </strong>
 
     <span>
         Custom Minecraft PvP Rankings
@@ -188,8 +210,12 @@
 </footer>
 
 
+
 <script src="data.js"></script>
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
