@@ -74,7 +74,7 @@ const gamemodes = {
 
     spearmace: {
         name: "SpearMace",
-        icon: "images/spearmace.png",
+        icon: "images/spear.png",
         description: "Spear Mace PvP."
     },
 
