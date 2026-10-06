@@ -39,6 +39,36 @@ const players = {
             points: 1000
         }
     ],
+    Mace: [
+
+    {
+        name: "AbyssalMC",
+        tier: "HT1",
+        points: 1200
+    },
+
+    {
+        name: "Steve",
+        tier: "HT2",
+        points: 900
+    }
+
+],
+    SpearMace: [
+
+    {
+        name: "AbyssalMC",
+        tier: "HT1",
+        points: 1200
+    },
+
+    {
+        name: "Steve",
+        tier: "HT2",
+        points: 900
+    }
+
+]
 
     Crystal: [
         {
