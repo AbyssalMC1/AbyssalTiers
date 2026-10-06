@@ -8,43 +8,43 @@ const gamemodes = {
 
     axe: {
         name: "Axe",
-        icon: "🪓",
+        icon: "images/axe.png",
         description: "Axe PvP rankings."
     },
 
     mace: {
         name: "Mace",
-        icon: "✦",
+        icon: "images/Mace.png",
         description: "Mace PvP rankings."
     },
 
     uhc: {
         name: "UHC",
-        icon: "❤",
+        icon: "images/uhc.png",
         description: "Ultra Hardcore PvP."
     },
 
     diapot: {
         name: "DiaPot",
-        icon: "◆",
+        icon: "images/pot.png",
         description: "Diamond Potion PvP."
     },
 
     nethpot: {
         name: "NethPot",
-        icon: "♨",
+        icon: "images/nethpot.png",
         description: "Netherite Potion PvP."
     },
 
     smp: {
         name: "SMP",
-        icon: "S",
+        icon: "images/smp.png",
         description: "SMP PvP rankings."
     },
 
     diasmp: {
         name: "DiaSMP",
-        icon: "D",
+        icon: "images/diasmp.png",
         description: "Diamond SMP PvP."
     },
 
