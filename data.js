@@ -8,7 +8,7 @@ const gamemodes = {
 
     axe: {
         name: "Axe",
-        icon: "images/axe.png",
+        icon: "images/Axe.png",
         description: "Axe PvP rankings."
     },
 
