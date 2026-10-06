@@ -2,7 +2,7 @@ const gamemodes = {
 
     sword: {
         name: "Sword",
-        icon: "https://www.google.com/imgres?q=crystal%20pvp%20emoji&imgurl=https%3A%2F%2Fmedia.forgecdn.net%2Favatars%2Fthumbnails%2F1486%2F76%2F256%2F256%2F638965736295609752.png&imgrefurl=https%3A%2F%2Fwww.curseforge.com%2Fminecraft%2Ftexture-packs%2Fcpvp-essentials-crystal-pvp&docid=N729ticXNcmZ1M&tbnid=GAbWg43wDphM7M&vet=12ahUKEwiS_Jm91aWXAxX6bvEDHfZnFUMQnPAOegQIOhAA..i&w=256&h=256&hcb=2&ved=2ahUKEwiS_Jm91aWXAxX6bvEDHfZnFUMQnPAOegQIOhAA",
+        icon: "⚔",
         description: "Sword PvP rankings."
     },
 
