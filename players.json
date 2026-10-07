@@ -1,0 +1,23 @@
+[
+    {
+        "name": "PlayerOne",
+        "region": "EU",
+        "sword": "HT1",
+        "axe": "LT1",
+        "mace": "HT2"
+    },
+    {
+        "name": "PlayerTwo",
+        "region": "NA",
+        "sword": "LT1",
+        "axe": "HT2",
+        "mace": "HT1"
+    },
+    {
+        "name": "PlayerThree",
+        "region": "EU",
+        "sword": "LT1",
+        "axe": "LT2",
+        "mace": "HT3"
+    }
+]
