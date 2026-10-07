@@ -1,27 +1,33 @@
 ```css
+/* =========================
+   RESET
+========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+/* =========================
+   BODY
+========================= */
+
 body {
     min-height: 100vh;
 
-    color: white;
-
     font-family: Arial, sans-serif;
 
-    background:
-        radial-gradient(
-            circle at top center,
-            #5c0a12 0%,
-            #2b070c 30%,
-            #140306 65%,
-            #080102 100%
-        );
+    color: white;
 
-    background-attachment: fixed;
+    background: linear-gradient(
+        135deg,
+        #5c0a12 0%,
+        #3a080e 25%,
+        #21050a 55%,
+        #0d0103 100%
+    );
 }
 
 
@@ -38,19 +44,15 @@ body {
 
     padding: 0 8%;
 
-    background:
-        linear-gradient(
-            90deg,
-            #120204,
-            #2b070c,
-            #120204
-        );
+    background: rgba(10, 0, 2, 0.85);
 
-    border-bottom: 1px solid #64121b;
+    border-bottom: 1px solid #69131d;
 
-    box-shadow:
-        0 4px 25px rgba(80, 0, 10, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
+
+
+/* LOGO */
 
 .logo {
     font-size: 22px;
@@ -58,24 +60,30 @@ body {
 }
 
 .logo span {
-    color: #e21b2d;
+    color: #e3263e;
 }
+
+
+/* NAVIGATION */
 
 nav {
     display: flex;
+
     gap: 30px;
 }
 
 nav a {
-    color: #c9aeb1;
+    color: #d0aeb2;
 
     text-decoration: none;
+
+    font-size: 15px;
 
     transition: 0.2s;
 }
 
 nav a:hover {
-    color: #ff3b4d;
+    color: #ff4055;
 }
 
 
@@ -85,6 +93,7 @@ nav a:hover {
 
 main {
     width: 90%;
+
     max-width: 1200px;
 
     margin: auto;
@@ -106,20 +115,21 @@ main {
 
     margin-bottom: 15px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #ff364a,
-            #ffffff,
-            #ff364a
-        );
+    background: linear-gradient(
+        90deg,
+        #ff3348,
+        #ffffff,
+        #ff3348
+    );
 
     -webkit-background-clip: text;
+    background-clip: text;
+
     -webkit-text-fill-color: transparent;
 }
 
 .hero p {
-    color: #c99ca2;
+    color: #cda1a7;
 
     font-size: 20px;
 }
@@ -141,7 +151,7 @@ section h2 {
 
 
 /* =========================
-   GAME CARDS
+   GAME GRID
 ========================= */
 
 .game-grid {
@@ -153,25 +163,31 @@ section h2 {
     gap: 20px;
 }
 
+
+/* =========================
+   GAME CARD
+========================= */
+
 .game-card {
-    background:
-        linear-gradient(
-            145deg,
-            #3a0b12,
-            #1b0509
-        );
-
-    border: 1px solid #64121b;
-
-    border-radius: 14px;
+    display: block;
 
     padding: 30px;
 
     text-align: center;
 
+    color: white;
+
     text-decoration: none;
 
-    color: white;
+    background: linear-gradient(
+        145deg,
+        #3d0a11,
+        #180307
+    );
+
+    border: 1px solid #68131d;
+
+    border-radius: 14px;
 
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.35);
@@ -180,166 +196,16 @@ section h2 {
 }
 
 .game-card:hover {
-    transform: translateY(-7px);
+    transform: translateY(-6px);
 
-    border-color: #d51b31;
+    background: linear-gradient(
+        145deg,
+        #5c101b,
+        #26050b
+    );
 
-    background:
-        linear-gradient(
-            145deg,
-            #58101a,
-            #25060b
-        );
-
-    box-shadow:
-        0 10px 35px rgba(180, 0, 20, 0.25);
-}
-
-.game-card img {
-    width: 80px;
-    height: 80px;
-
-    object-fit: contain;
-
-    margin-bottom: 15px;
-}
-
-.game-card h3 {
-    font-size: 22px;
-}
-
-.game-card p {
-    color: #b98b91;
-
-    margin-top: 8px;
-}
-
-
-/* =========================
-   LEADERBOARD
-========================= */
-
-.leaderboard {
-    background:
-        linear-gradient(
-            135deg,
-            #320910,
-            #170408
-        );
-
-    border: 1px solid #64121b;
-
-    border-radius: 14px;
-
-    overflow: hidden;
+    border-color: #d51c34;
 
     box-shadow:
-        0 10px 35px rgba(0, 0, 0, 0.4);
-}
-
-.player {
-    display: grid;
-
-    grid-template-columns:
-        80px 1fr 100px;
-
-    padding: 20px;
-
-    border-bottom: 1px solid #451019;
-
-    align-items: center;
-
-    transition: 0.2s;
-}
-
-.player:hover {
-    background:
-        linear-gradient(
-            90deg,
-            #421019,
-            #26070c
-        );
-}
-
-.player:last-child {
-    border-bottom: none;
-}
-
-.rank {
-    color: #a77a80;
-}
-
-.name {
-    font-weight: bold;
-}
-
-.tier {
-    color: #ff394d;
-
-    font-weight: bold;
-}
-
-
-/* =========================
-   ABOUT
-========================= */
-
-#about {
-    color: #c29ba0;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    text-align: center;
-
-    padding: 40px;
-
-    color: #806166;
-
-    border-top: 1px solid #451019;
-
-    background:
-        linear-gradient(
-            180deg,
-            #120204,
-            #080102
-        );
-}
-
-
-/* =========================
-   SCROLLBAR
-========================= */
-
-::-webkit-scrollbar {
-    width: 9px;
-}
-
-::-webkit-scrollbar-track {
-    background: #0c0103;
-}
-
-::-webkit-scrollbar-thumb {
-    background:
-        linear-gradient(
-            180deg,
-            #8f1725,
-            #4b0a12
-        );
-
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        linear-gradient(
-            180deg,
-            #d51b31,
-            #75101b
-        );
-}
+        0 10px 35px
 ```
