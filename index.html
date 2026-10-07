@@ -2,220 +2,123 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Abyssal Tiers</title>
 
-    <link rel="stylesheet"
-          href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
-
-<div class="background"></div>
-
 
 <header class="navbar">
 
     <div class="logo">
-
-        <span class="logo-main">
-            ABYSSAL
-        </span>
-
-        <span class="logo-sub">
-            TIERS
-        </span>
-
+        ABYSSAL<span>TIERS</span>
     </div>
 
-
     <nav>
-
-        <a href="#overallSection">
-            Overall
-        </a>
-
-        <a href="#modesSection">
-            Gamemodes
-        </a>
-
+        <a href="index.html">Home</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#about">About</a>
     </nav>
 
 </header>
 
 
-
 <main>
-
-
-    <!-- HERO -->
 
     <section class="hero">
 
-        <div>
+        <h1>Abyssal Tiers</h1>
 
-            <div class="small-title">
-                MINECRAFT PVP RANKINGS
-            </div>
+        <p>
+            Minecraft PvP Tier List
+        </p>
 
-            <h1>
-                Abyssal
-                <span>Tiers</span>
-            </h1>
+    </section>
 
-            <p>
-                Custom Minecraft PvP rankings.
-            </p>
+
+    <section class="gamemodes">
+
+        <h2>Gamemodes</h2>
+
+        <div class="game-grid">
+
+            <a class="game-card" href="sword.html">
+                <img src="images/sword.png">
+                <h3>Sword</h3>
+                <p>View Sword rankings</p>
+            </a>
+
+            <a class="game-card" href="axe.html">
+                <img src="images/axe.png">
+                <h3>Axe</h3>
+                <p>View Axe rankings</p>
+            </a>
+
+            <a class="game-card" href="mace.html">
+                <img src="images/mace.png">
+                <h3>Mace</h3>
+                <p>View Mace rankings</p>
+            </a>
 
         </div>
 
     </section>
 
 
+    <section id="leaderboard">
 
-    <!-- OVERALL -->
+        <h2>Top Players</h2>
 
-    <section id="overallSection">
+        <div class="leaderboard">
 
-        <div class="section-title">
-
-            <div>
-
-                <span class="section-small">
-                    RANKINGS
-                </span>
-
-                <h2>
-                    Overall
-                </h2>
-
+            <div class="player">
+                <span class="rank">#1</span>
+                <span class="name">PlayerOne</span>
+                <span class="tier">HT1</span>
             </div>
 
-            <div
-                id="overallPlayerCount"
-                class="player-count">
+            <div class="player">
+                <span class="rank">#2</span>
+                <span class="name">PlayerTwo</span>
+                <span class="tier">HT1</span>
             </div>
 
-        </div>
-
-
-        <div
-            id="overallLeaderboard"
-            class="leaderboard">
-        </div>
-
-    </section>
-
-
-
-    <!-- GAMEMODES -->
-
-    <section id="modesSection">
-
-        <div class="section-title">
-
-            <div>
-
-                <span class="section-small">
-                    GAME MODES
-                </span>
-
-                <h2>
-                    PvP Gamemodes
-                </h2>
-
+            <div class="player">
+                <span class="rank">#3</span>
+                <span class="name">PlayerThree</span>
+                <span class="tier">LT1</span>
             </div>
 
         </div>
 
-
-        <div
-            id="gamemodeGrid"
-            class="gamemode-grid">
-        </div>
-
     </section>
 
 
+    <section id="about">
 
-    <!-- GAMEMODE PAGE -->
+        <h2>About</h2>
 
-    <section
-        id="gamemodePage"
-        class="hidden">
-
-        <a
-            href="#modesSection"
-            class="back-button">
-
-            ← Back to Gamemodes
-
-        </a>
-
-
-        <div class="gamemode-header">
-
-            <span class="section-small">
-                GAMEMODE
-            </span>
-
-            <h2 id="gamemodeTitle">
-                Sword
-            </h2>
-
-            <p id="gamemodeDescription">
-            </p>
-
-        </div>
-
-
-        <div
-            id="gamemodeLeaderboard"
-            class="leaderboard">
-        </div>
+        <p>
+            Abyssal Tiers is a Minecraft PvP ranking website.
+        </p>
 
     </section>
-
-
-
-    <!-- PLAYER PROFILE -->
-
-    <section
-        id="playerProfile"
-        class="hidden">
-    </section>
-
 
 </main>
 
 
-
 <footer>
 
-    <strong>
-        Abyssal Tiers
-    </strong>
-
-    <span>
-        Custom Minecraft PvP Rankings
-    </span>
+    <p>© 2026 Abyssal Tiers</p>
 
 </footer>
 
 
-
-<script src="data.js"></script>
-
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
