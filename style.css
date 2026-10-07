@@ -1,39 +1,14 @@
-```css
-/* =========================
-   RESET
-========================= */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
-/* =========================
-   BODY
-========================= */
-
 body {
-    min-height: 100vh;
-
-    font-family: Arial, sans-serif;
-
+    background: #08090d;
     color: white;
-
-    background: linear-gradient(
-        135deg,
-        #5c0a12 0%,
-        #3a080e 25%,
-        #21050a 55%,
-        #0d0103 100%
-    );
+    font-family: Arial, sans-serif;
 }
-
-
-/* =========================
-   NAVBAR
-========================= */
 
 .navbar {
     height: 70px;
@@ -44,15 +19,9 @@ body {
 
     padding: 0 8%;
 
-    background: rgba(10, 0, 2, 0.85);
-
-    border-bottom: 1px solid #69131d;
-
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    background: #0d0f15;
+    border-bottom: 1px solid #20232c;
 }
-
-
-/* LOGO */
 
 .logo {
     font-size: 22px;
@@ -60,84 +29,44 @@ body {
 }
 
 .logo span {
-    color: #e3263e;
+    color: #9b0000;
 }
-
-
-/* NAVIGATION */
 
 nav {
     display: flex;
-
     gap: 30px;
 }
 
 nav a {
-    color: #d0aeb2;
-
+    color: #aaa;
     text-decoration: none;
-
-    font-size: 15px;
-
     transition: 0.2s;
 }
 
 nav a:hover {
-    color: #ff4055;
+    color: white;
 }
-
-
-/* =========================
-   MAIN
-========================= */
 
 main {
     width: 90%;
-
     max-width: 1200px;
-
     margin: auto;
 }
 
-
-/* =========================
-   HERO
-========================= */
-
 .hero {
     text-align: center;
-
-    padding: 110px 20px;
+    padding: 100px 20px;
 }
 
 .hero h1 {
     font-size: 60px;
-
     margin-bottom: 15px;
-
-    background: linear-gradient(
-        90deg,
-        #ff3348,
-        #ffffff,
-        #ff3348
-    );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    -webkit-text-fill-color: transparent;
 }
 
 .hero p {
-    color: #cda1a7;
-
+    color: #999;
     font-size: 20px;
 }
-
-
-/* =========================
-   SECTIONS
-========================= */
 
 section {
     margin-bottom: 80px;
@@ -145,14 +74,8 @@ section {
 
 section h2 {
     font-size: 30px;
-
     margin-bottom: 25px;
 }
-
-
-/* =========================
-   GAME GRID
-========================= */
 
 .game-grid {
     display: grid;
@@ -163,49 +86,98 @@ section h2 {
     gap: 20px;
 }
 
-
-/* =========================
-   GAME CARD
-========================= */
-
 .game-card {
-    display: block;
+    background: #11131a;
+
+    border: 1px solid #222631;
+
+    border-radius: 12px;
 
     padding: 30px;
 
     text-align: center;
 
-    color: white;
-
     text-decoration: none;
 
-    background: linear-gradient(
-        145deg,
-        #3d0a11,
-        #180307
-    );
+    color: white;
 
-    border: 1px solid #68131d;
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.35);
-
-    transition: 0.25s;
+    transition: 0.2s;
 }
 
 .game-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
 
-    background: linear-gradient(
-        145deg,
-        #5c101b,
-        #26050b
-    );
+    border-color: #8b0000;
 
-    border-color: #d51c34;
+    background: #151821;
+}
 
-    box-shadow:
-        0 10px 35px
-```
+.game-card img {
+    width: 80px;
+    height: 80px;
+
+    object-fit: contain;
+
+    margin-bottom: 15px;
+}
+
+.game-card h3 {
+    font-size: 22px;
+}
+
+.game-card p {
+    color: #888;
+    margin-top: 8px;
+}
+
+.leaderboard {
+    background: #11131a;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+.player {
+    display: grid;
+
+    grid-template-columns:
+        80px 1fr 100px;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #222631;
+
+    align-items: center;
+}
+
+.player:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    color: #888;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.tier {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+#about {
+    color: #aaa;
+}
+
+footer {
+    text-align: center;
+
+    padding: 40px;
+
+    color: #666;
+
+    border-top: 1px solid #20232c;
+}
