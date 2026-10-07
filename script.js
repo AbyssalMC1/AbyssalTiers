@@ -1,53 +1,44 @@
-/* =========================================================
-   ABYSSAL TIERS — MAIN SCRIPT
-========================================================= */
+// ===============================
+// ABYSSAL TIERS - SCRIPT
+// ===============================
 
 
-/* =========================================================
-   GET TIER
-========================================================= */
+// ===============================
+// TIER SYSTEM
+// ===============================
 
 function getTier(points) {
 
-    points = Number(points) || 0;
+    if (points >= 950) return "HT1";
+    if (points >= 900) return "LT1";
 
-    if (points >= 900) return "HT1";
-    if (points >= 800) return "LT1";
+    if (points >= 850) return "HT2";
+    if (points >= 800) return "LT2";
 
-    if (points >= 700) return "HT2";
-    if (points >= 600) return "LT2";
+    if (points >= 750) return "HT3";
+    if (points >= 700) return "LT3";
 
-    if (points >= 500) return "HT3";
-    if (points >= 400) return "LT3";
+    if (points >= 650) return "HT4";
+    if (points >= 600) return "LT4";
 
-    if (points >= 300) return "HT4";
-    if (points >= 200) return "LT4";
-
-    if (points >= 100) return "HT5";
+    if (points >= 550) return "HT5";
 
     return "LT5";
 }
 
 
-/* =========================================================
-   MINECRAFT HEAD
-========================================================= */
+// ===============================
+// MINECRAFT HEAD
+// ===============================
 
 function getHead(name) {
-
-    return `
-        <img
-            class="player-head"
-            src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/44"
-            alt="${name}"
-        >
-    `;
+    return `https://mc-heads.net/avatar/${encodeURIComponent(name)}/44`;
 }
 
 
-/* =========================================================
-   CALCULATE OVERALL
-========================================================= */
+// ===============================
+// CALCULATE OVERALL
+// ===============================
 
 function calculateOverall(player) {
 
@@ -59,10 +50,8 @@ function calculateOverall(player) {
         const points = Number(player[modeKey]);
 
         if (!isNaN(points)) {
-
             total += points;
             count++;
-
         }
 
     });
@@ -75,9 +64,9 @@ function calculateOverall(player) {
 }
 
 
-/* =========================================================
-   CREATE PLAYER ROW
-========================================================= */
+// ===============================
+// CREATE PLAYER ROW
+// ===============================
 
 function createPlayerRow(player, position, points) {
 
@@ -88,94 +77,52 @@ function createPlayerRow(player, position, points) {
     row.className = "leaderboard-row";
 
     row.innerHTML = `
-
         <div class="player-position">
-            #${position}
+            ${position}
         </div>
 
-        ${getHead(player.name)}
-
         <div class="player-info">
+
+            <img
+                class="player-head"
+                src="${getHead(player.name)}"
+                alt="${player.name}"
+            >
 
             <div class="player-name">
                 ${player.name}
             </div>
 
-            <div class="player-rank">
-                ${tier}
-            </div>
-
         </div>
 
         <div class="player-points">
-            ${Number(points).toLocaleString()} pts
+            ${points}
         </div>
 
         <div class="player-tier tier-${tier.toLowerCase()}">
             ${tier}
         </div>
-
     `;
 
     row.addEventListener("click", () => {
-
         showPlayerProfile(player);
-
     });
 
     return row;
 }
 
 
-/* =========================================================
-   SHOW OVERALL
-========================================================= */
-
-function showOverall() {
-
-    const overall =
-        document.getElementById("overallSection");
-
-    const modes =
-        document.getElementById("modesSection");
-
-    const gamemodePage =
-        document.getElementById("gamemodePage");
-
-    const profile =
-        document.getElementById("playerProfile");
-
-
-    if (overall) {
-        overall.style.display = "block";
-        overall.classList.remove("hidden");
-    }
-
-    if (modes) {
-        modes.style.display = "block";
-        modes.classList.remove("hidden");
-    }
-
-    if (gamemodePage) {
-        gamemodePage.style.display = "none";
-        gamemodePage.classList.add("hidden");
-    }
-
-    if (profile) {
-        profile.style.display = "none";
-        profile.classList.add("hidden");
-    }
-}
-
-
-/* =========================================================
-   RENDER OVERALL
-========================================================= */
+// ===============================
+// RENDER OVERALL
+// ===============================
 
 function renderOverall() {
 
     const leaderboard =
         document.getElementById("overallLeaderboard");
+
+    const playerCount =
+        document.getElementById("overallPlayerCount");
 
     if (!leaderboard) {
         return;
@@ -198,11 +145,15 @@ function renderOverall() {
                 return b.points - a.points;
             }
 
-            return a.player.name.localeCompare(
-                b.player.name
-            );
+            return a.player.name.localeCompare(b.player.name);
 
         });
+
+
+    if (playerCount) {
+        playerCount.textContent =
+            `${players.length} players`;
+    }
 
 
     rankedPlayers.forEach((entry, index) => {
@@ -216,23 +167,12 @@ function renderOverall() {
         leaderboard.appendChild(row);
 
     });
-
-
-    const playerCount =
-        document.getElementById("overallPlayerCount");
-
-    if (playerCount) {
-
-        playerCount.textContent =
-            `${players.length} players`;
-
-    }
 }
 
 
-/* =========================================================
-   RENDER GAMEMODES
-========================================================= */
+// ===============================
+// RENDER GAMEMODES
+// ===============================
 
 function renderGamemodes() {
 
@@ -246,88 +186,91 @@ function renderGamemodes() {
     grid.innerHTML = "";
 
 
-    Object.entries(gamemodes).forEach(
-        ([modeKey, mode]) => {
+    Object.entries(gamemodes).forEach(([key, mode]) => {
 
-            const card =
-                document.createElement("div");
+        const card =
+            document.createElement("div");
 
-            card.className =
-                "gamemode-card";
+        card.className = "gamemode-card";
 
 
-            let iconHTML = "";
+        /*
+         * Dacă icon-ul este o imagine,
+         * o afișăm ca imagine.
+         *
+         * Dacă este emoji/text,
+         * îl afișăm ca text.
+         */
 
+        let iconHTML = "";
 
-            if (
-                mode.icon &&
-                (
-                    mode.icon.startsWith("http://") ||
-                    mode.icon.startsWith("https://") ||
-                    mode.icon.endsWith(".png") ||
-                    mode.icon.endsWith(".jpg") ||
-                    mode.icon.endsWith(".jpeg") ||
-                    mode.icon.endsWith(".webp")
-                )
-            ) {
+        if (
+            mode.icon &&
+            (
+                mode.icon.startsWith("http://") ||
+                mode.icon.startsWith("https://") ||
+                mode.icon.endsWith(".png") ||
+                mode.icon.endsWith(".jpg") ||
+                mode.icon.endsWith(".jpeg") ||
+                mode.icon.endsWith(".webp")
+            )
+        ) {
 
-                iconHTML = `
-                    <div class="mode-icon">
-                        <img
-                            src="${mode.icon}"
-                            alt="${mode.name}"
-                        >
-                    </div>
-                `;
-
-            } else {
-
-                iconHTML = `
-                    <div class="mode-icon">
-                        <span>${mode.icon || ""}</span>
-                    </div>
-                `;
-
-            }
-
-
-            card.innerHTML = `
-
-                ${iconHTML}
-
-                <div class="mode-name">
-                    ${mode.name}
+            iconHTML = `
+                <div class="mode-icon">
+                    <img
+                        src="${mode.icon}"
+                        alt="${mode.name}"
+                    >
                 </div>
-
-                <div class="mode-players">
-                    ${players.length} players
-                </div>
-
             `;
 
+        } else {
 
-            card.addEventListener("click", () => {
-
-                showGamemode(modeKey);
-
-            });
-
-
-            grid.appendChild(card);
+            iconHTML = `
+                <div class="mode-icon">
+                    <span>${mode.icon || ""}</span>
+                </div>
+            `;
 
         }
-    );
+
+
+        card.innerHTML = `
+
+            ${iconHTML}
+
+            <div class="mode-name">
+                ${mode.name}
+            </div>
+
+            <div class="mode-players">
+                ${players.length} players
+            </div>
+
+        `;
+
+
+        card.addEventListener("click", () => {
+
+            showGamemode(key);
+
+        });
+
+
+        grid.appendChild(card);
+
+    });
 }
 
 
-/* =========================================================
-   SHOW GAMEMODE
-========================================================= */
+// ===============================
+// SHOW GAMEMODE
+// ===============================
 
 function showGamemode(modeKey) {
 
-    const mode =
-        gamemodes[modeKey];
+    const mode = gamemodes[modeKey];
 
     if (!mode) {
         return;
@@ -335,39 +278,39 @@ function showGamemode(modeKey) {
 
 
     const overall =
-        document.getElementById("overallSection");
+        document.getElementById("overall");
 
-    const modes =
-        document.getElementById("modesSection");
+    const gamemodesSection =
+        document.getElementById("gamemodes");
 
     const gamemodePage =
         document.getElementById("gamemodePage");
 
-    const profile =
+    const playerProfile =
         document.getElementById("playerProfile");
 
 
+    // Ascunde pagina principală
     if (overall) {
         overall.style.display = "none";
-        overall.classList.add("hidden");
     }
 
-    if (modes) {
-        modes.style.display = "none";
-        modes.classList.add("hidden");
+    if (gamemodesSection) {
+        gamemodesSection.style.display = "none";
     }
 
-    if (profile) {
-        profile.style.display = "none";
-        profile.classList.add("hidden");
+    if (playerProfile) {
+        playerProfile.style.display = "none";
     }
 
+
+    // Arată pagina gamemode-ului
     if (gamemodePage) {
         gamemodePage.style.display = "block";
-        gamemodePage.classList.remove("hidden");
     }
 
 
+    // Titlu
     const title =
         document.getElementById("gamemodeTitle");
 
@@ -376,6 +319,7 @@ function showGamemode(modeKey) {
     }
 
 
+    // Descriere
     const description =
         document.getElementById("gamemodeDescription");
 
@@ -385,9 +329,11 @@ function showGamemode(modeKey) {
     }
 
 
+    // Leaderboard
     renderGamemode(modeKey);
 
 
+    // Scroll sus
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -395,9 +341,9 @@ function showGamemode(modeKey) {
 }
 
 
-/* =========================================================
-   RENDER GAMEMODE
-========================================================= */
+// ===============================
+// RENDER GAMEMODE LEADERBOARD
+// ===============================
 
 function renderGamemode(modeKey) {
 
@@ -414,9 +360,12 @@ function renderGamemode(modeKey) {
     const rankedPlayers = players
         .map(player => {
 
+            const points =
+                Number(player[modeKey]) || 0;
+
             return {
                 player: player,
-                points: Number(player[modeKey]) || 0
+                points: points
             };
 
         })
@@ -426,9 +375,7 @@ function renderGamemode(modeKey) {
                 return b.points - a.points;
             }
 
-            return a.player.name.localeCompare(
-                b.player.name
-            );
+            return a.player.name.localeCompare(b.player.name);
 
         });
 
@@ -447,72 +394,112 @@ function renderGamemode(modeKey) {
 }
 
 
-/* =========================================================
-   PLAYER PROFILE
-========================================================= */
+// ===============================
+// PLAYER PROFILE
+// ===============================
 
 function showPlayerProfile(player) {
 
-    if (!player) {
-        return;
-    }
-
-
     const overall =
-        document.getElementById("overallSection");
+        document.getElementById("overall");
 
-    const modes =
-        document.getElementById("modesSection");
+    const gamemodesSection =
+        document.getElementById("gamemodes");
 
     const gamemodePage =
         document.getElementById("gamemodePage");
 
-    const profile =
+    const playerProfile =
         document.getElementById("playerProfile");
 
 
     if (overall) {
         overall.style.display = "none";
-        overall.classList.add("hidden");
     }
 
-    if (modes) {
-        modes.style.display = "none";
-        modes.classList.add("hidden");
+    if (gamemodesSection) {
+        gamemodesSection.style.display = "none";
     }
 
     if (gamemodePage) {
         gamemodePage.style.display = "none";
-        gamemodePage.classList.add("hidden");
     }
 
-    if (!profile) {
+    if (playerProfile) {
+        playerProfile.style.display = "block";
+    }
+
+
+    // Numele playerului
+    const profileName =
+        document.getElementById("profileName");
+
+    if (profileName) {
+        profileName.textContent = player.name;
+    }
+
+
+    // Head
+    const profileHead =
+        document.getElementById("profileHead");
+
+    if (profileHead) {
+        profileHead.src = getHead(player.name);
+        profileHead.alt = player.name;
+    }
+
+
+    // Overall points
+    const profilePoints =
+        document.getElementById("profileOverallPoints");
+
+    if (profilePoints) {
+
+        profilePoints.textContent =
+            calculateOverall(player);
+
+    }
+
+
+    // Overall tier
+    const profileTier =
+        document.getElementById("profileOverallTier");
+
+    if (profileTier) {
+
+        profileTier.textContent =
+            getTier(calculateOverall(player));
+
+    }
+
+
+    // Gamemode list
+    const profileModes =
+        document.getElementById("profileGamemodes");
+
+    if (!profileModes) {
         return;
     }
 
 
-    profile.style.display = "block";
-    profile.classList.remove("hidden");
-
-
-    const overallPoints =
-        calculateOverall(player);
-
-    const overallTier =
-        getTier(overallPoints);
-
-
-    let modesHTML = "";
+    profileModes.innerHTML = "";
 
 
     Object.entries(gamemodes).forEach(
-        ([modeKey, mode]) => {
+        ([key, mode]) => {
 
             const points =
-                Number(player[modeKey]) || 0;
+                Number(player[key]) || 0;
 
             const tier =
                 getTier(points);
+
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "profile-mode-row";
 
 
             let iconHTML = "";
@@ -549,125 +536,33 @@ function showPlayerProfile(player) {
             }
 
 
-            modesHTML += `
+            row.innerHTML = `
 
-                <div
-                    class="profile-mode-row"
-                    data-mode="${modeKey}"
-                >
+                <div class="profile-mode-name">
 
-                    <div class="profile-mode-name">
+                    ${iconHTML}
 
-                        ${iconHTML}
+                    <span>
+                        ${mode.name}
+                    </span>
 
-                        <span>
-                            ${mode.name}
-                        </span>
+                </div>
 
-                    </div>
+                <div class="profile-mode-points">
+                    ${points}
+                </div>
 
-                    <div class="profile-mode-points">
-                        ${points} pts
-                    </div>
-
-                    <div
-                        class="profile-mode-tier tier-${tier.toLowerCase()}"
-                    >
-                        ${tier}
-                    </div>
-
+                <div class="profile-mode-tier tier-${tier.toLowerCase()}">
+                    ${tier}
                 </div>
 
             `;
 
+
+            profileModes.appendChild(row);
+
         }
     );
-
-
-    profile.innerHTML = `
-
-        <a
-            href="#overallSection"
-            class="back-button"
-        >
-            ← Back to Overall
-        </a>
-
-
-        <div class="profile-card">
-
-            ${getHead(player.name)}
-
-            <div>
-
-                <h2>
-                    ${player.name}
-                </h2>
-
-            </div>
-
-
-            <div class="profile-overall">
-
-                <span>
-                    Overall
-                </span>
-
-                <strong>
-                    ${overallPoints} pts
-                </strong>
-
-                <div
-                    class="profile-mode-tier tier-${overallTier.toLowerCase()}"
-                >
-                    ${overallTier}
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="section-title">
-
-            <div>
-
-                <span class="section-small">
-                    RANKINGS
-                </span>
-
-                <h2>
-                    Gamemodes
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="profile-modes">
-
-            ${modesHTML}
-
-        </div>
-
-    `;
-
-
-    profile
-        .querySelectorAll(".profile-mode-row")
-        .forEach(row => {
-
-            row.addEventListener("click", () => {
-
-                const mode =
-                    row.dataset.mode;
-
-                showGamemode(mode);
-
-            });
-
-        });
 
 
     window.scrollTo({
@@ -677,46 +572,46 @@ function showPlayerProfile(player) {
 }
 
 
-/* =========================================================
-   SHOW MAIN PAGE
-========================================================= */
+// ===============================
+// SHOW MAIN PAGE
+// ===============================
 
 function showMainPage(scrollTarget = null) {
 
     const overall =
-        document.getElementById("overallSection");
+        document.getElementById("overall");
 
-    const modes =
-        document.getElementById("modesSection");
+    const gamemodesSection =
+        document.getElementById("gamemodes");
 
     const gamemodePage =
         document.getElementById("gamemodePage");
 
-    const profile =
+    const playerProfile =
         document.getElementById("playerProfile");
 
 
+    // Arată pagina principală
     if (overall) {
         overall.style.display = "block";
-        overall.classList.remove("hidden");
     }
 
-    if (modes) {
-        modes.style.display = "block";
-        modes.classList.remove("hidden");
+    if (gamemodesSection) {
+        gamemodesSection.style.display = "block";
     }
 
+
+    // Ascunde paginile secundare
     if (gamemodePage) {
         gamemodePage.style.display = "none";
-        gamemodePage.classList.add("hidden");
     }
 
-    if (profile) {
-        profile.style.display = "none";
-        profile.classList.add("hidden");
+    if (playerProfile) {
+        playerProfile.style.display = "none";
     }
 
 
+    // Scroll
     if (scrollTarget) {
 
         setTimeout(() => {
@@ -746,80 +641,86 @@ function showMainPage(scrollTarget = null) {
 }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+// ===============================
+// NAVIGATION
+// ===============================
 
 function setupNavigation() {
 
-
-    /* OVERALL */
+    // ===========================
+    // OVERALL
+    // ===========================
 
     const overallLinks =
         document.querySelectorAll(
-            'a[href="#overallSection"]'
+            'a[href="#overall"]'
         );
 
 
     overallLinks.forEach(link => {
 
-        link.addEventListener("click", event => {
+        link.addEventListener("click", (event) => {
 
             event.preventDefault();
 
-            showMainPage("overallSection");
+            showMainPage("overall");
 
         });
 
     });
 
 
-    /* GAMEMODES */
+    // ===========================
+    // GAMEMODES
+    // ===========================
 
-    const gamemodeLinks =
+    const gamemodesLinks =
         document.querySelectorAll(
-            'a[href="#modesSection"]'
+            'a[href="#gamemodes"]'
         );
 
 
-    gamemodeLinks.forEach(link => {
+    gamemodesLinks.forEach(link => {
 
-        link.addEventListener("click", event => {
+        link.addEventListener("click", (event) => {
 
             event.preventDefault();
 
-            showMainPage("modesSection");
+            showMainPage("gamemodes");
 
         });
 
     });
 
 
-    /* BACK BUTTON */
+    // ===========================
+    // BACK BUTTONS
+    // ===========================
 
-    document
-        .querySelectorAll(".back-button")
-        .forEach(button => {
+    const backButtons =
+        document.querySelectorAll(
+            ".back-button, [data-back]"
+        );
 
-            button.addEventListener(
-                "click",
-                event => {
 
-                    event.preventDefault();
+    backButtons.forEach(button => {
 
-                    showMainPage("overallSection");
+        button.addEventListener("click", (event) => {
 
-                }
-            );
+            event.preventDefault();
+
+            showMainPage();
 
         });
+
+    });
 
 }
 
 
-/* =========================================================
-   START WEBSITE
-========================================================= */
+// ===============================
+// START WEBSITE
+// ===============================
 
 document.addEventListener(
     "DOMContentLoaded",
