@@ -8,13 +8,13 @@ const gamemodes = {
 
     axe: {
         name: "Axe",
-        icon: "images/Axe.png",
+        icon: "images/axe.png",
         description: "Axe PvP rankings."
     },
 
     mace: {
         name: "Mace",
-        icon: "images/Mace.png",
+        icon: "images/mace.png",
         description: "Mace PvP rankings."
     },
 
@@ -38,7 +38,7 @@ const gamemodes = {
 
     smp: {
         name: "SMP",
-        icon: "images/Smp.png",
+        icon: "images/smp.png",
         description: "SMP PvP rankings."
     },
 
