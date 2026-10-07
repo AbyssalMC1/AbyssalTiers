@@ -1,3 +1,4 @@
+```css
 * {
     margin: 0;
     padding: 0;
@@ -5,10 +6,28 @@
 }
 
 body {
-    background: #08090d;
+    min-height: 100vh;
+
     color: white;
+
     font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            #5c0a12 0%,
+            #2b070c 30%,
+            #140306 65%,
+            #080102 100%
+        );
+
+    background-attachment: fixed;
 }
+
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
     height: 70px;
@@ -19,8 +38,18 @@ body {
 
     padding: 0 8%;
 
-    background: #0d0f15;
-    border-bottom: 1px solid #20232c;
+    background:
+        linear-gradient(
+            90deg,
+            #120204,
+            #2b070c,
+            #120204
+        );
+
+    border-bottom: 1px solid #64121b;
+
+    box-shadow:
+        0 4px 25px rgba(80, 0, 10, 0.4);
 }
 
 .logo {
@@ -29,7 +58,7 @@ body {
 }
 
 .logo span {
-    color: #9b0000;
+    color: #e21b2d;
 }
 
 nav {
@@ -38,35 +67,67 @@ nav {
 }
 
 nav a {
-    color: #aaa;
+    color: #c9aeb1;
+
     text-decoration: none;
+
     transition: 0.2s;
 }
 
 nav a:hover {
-    color: white;
+    color: #ff3b4d;
 }
+
+
+/* =========================
+   MAIN
+========================= */
 
 main {
     width: 90%;
     max-width: 1200px;
+
     margin: auto;
 }
 
+
+/* =========================
+   HERO
+========================= */
+
 .hero {
     text-align: center;
-    padding: 100px 20px;
+
+    padding: 110px 20px;
 }
 
 .hero h1 {
     font-size: 60px;
+
     margin-bottom: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff364a,
+            #ffffff,
+            #ff364a
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero p {
-    color: #999;
+    color: #c99ca2;
+
     font-size: 20px;
 }
+
+
+/* =========================
+   SECTIONS
+========================= */
 
 section {
     margin-bottom: 80px;
@@ -74,8 +135,14 @@ section {
 
 section h2 {
     font-size: 30px;
+
     margin-bottom: 25px;
 }
+
+
+/* =========================
+   GAME CARDS
+========================= */
 
 .game-grid {
     display: grid;
@@ -87,11 +154,16 @@ section h2 {
 }
 
 .game-card {
-    background: #11131a;
+    background:
+        linear-gradient(
+            145deg,
+            #3a0b12,
+            #1b0509
+        );
 
-    border: 1px solid #222631;
+    border: 1px solid #64121b;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     padding: 30px;
 
@@ -101,15 +173,26 @@ section h2 {
 
     color: white;
 
-    transition: 0.2s;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+
+    transition: 0.25s;
 }
 
 .game-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-7px);
 
-    border-color: #8b0000;
+    border-color: #d51b31;
 
-    background: #151821;
+    background:
+        linear-gradient(
+            145deg,
+            #58101a,
+            #25060b
+        );
+
+    box-shadow:
+        0 10px 35px rgba(180, 0, 20, 0.25);
 }
 
 .game-card img {
@@ -126,16 +209,32 @@ section h2 {
 }
 
 .game-card p {
-    color: #888;
+    color: #b98b91;
+
     margin-top: 8px;
 }
 
-.leaderboard {
-    background: #11131a;
 
-    border-radius: 12px;
+/* =========================
+   LEADERBOARD
+========================= */
+
+.leaderboard {
+    background:
+        linear-gradient(
+            135deg,
+            #320910,
+            #170408
+        );
+
+    border: 1px solid #64121b;
+
+    border-radius: 14px;
 
     overflow: hidden;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.4);
 }
 
 .player {
@@ -146,9 +245,20 @@ section h2 {
 
     padding: 20px;
 
-    border-bottom: 1px solid #222631;
+    border-bottom: 1px solid #451019;
 
     align-items: center;
+
+    transition: 0.2s;
+}
+
+.player:hover {
+    background:
+        linear-gradient(
+            90deg,
+            #421019,
+            #26070c
+        );
 }
 
 .player:last-child {
@@ -156,7 +266,7 @@ section h2 {
 }
 
 .rank {
-    color: #888;
+    color: #a77a80;
 }
 
 .name {
@@ -164,20 +274,72 @@ section h2 {
 }
 
 .tier {
-    color: #ff4444;
+    color: #ff394d;
+
     font-weight: bold;
 }
 
+
+/* =========================
+   ABOUT
+========================= */
+
 #about {
-    color: #aaa;
+    color: #c29ba0;
 }
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     text-align: center;
 
     padding: 40px;
 
-    color: #666;
+    color: #806166;
 
-    border-top: 1px solid #20232c;
+    border-top: 1px solid #451019;
+
+    background:
+        linear-gradient(
+            180deg,
+            #120204,
+            #080102
+        );
 }
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0c0103;
+}
+
+::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #8f1725,
+            #4b0a12
+        );
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #d51b31,
+            #75101b
+        );
+}
+```
