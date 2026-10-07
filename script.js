@@ -1,131 +1,90 @@
-@@ -1,11 +1,11 @@
-/* ============================================
-   ABYSSAL TIERS
-============================================ */
-// ===============================
+// ========================================
 // ABYSSAL TIERS - SCRIPT
-// ===============================
+// ========================================
 
 
-/* ============================================
-   GET TIER
-============================================ */
-// ===============================
-// TIER SYSTEM
-// ===============================
+// ========================================
+// GET TIER
+// ========================================
 
 function getTier(points) {
 
-@@ -27,716 +27,710 @@ function getTier(points) {
+    points = Number(points) || 0;
+
+    if (points >= 1000) return "HT1";
+    if (points >= 900) return "LT1";
+
+    if (points >= 800) return "HT2";
+    if (points >= 700) return "LT2";
+
+    if (points >= 600) return "HT3";
+    if (points >= 500) return "LT3";
+
+    if (points >= 400) return "HT4";
+    if (points >= 300) return "LT4";
+
+    return "HT5";
 }
 
 
-/* ============================================
-   MINECRAFT HEAD
-============================================ */
-// ===============================
+// ========================================
 // MINECRAFT HEAD
-// ===============================
+// ========================================
 
 function getHead(name) {
 
-    return `
-        <img
-            class="head"
-            src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/44"
-            alt="${name}"
-        >
-    `;
-
     return `https://mc-heads.net/avatar/${encodeURIComponent(name)}/44`;
+
 }
 
 
-/* ============================================
-   OVERALL POINTS
-============================================ */
-// ===============================
+// ========================================
 // CALCULATE OVERALL
-// ===============================
+// ========================================
 
 function calculateOverall(player) {
 
     let total = 0;
     let count = 0;
 
-    let amount = 0;
-
-
-    Object.keys(gamemodes).forEach(function(mode) {
-
-        if (typeof player[mode] === "number") {
-
-            total += player[mode];
     Object.keys(gamemodes).forEach(modeKey => {
 
-            amount++;
         const points = Number(player[modeKey]);
 
-        if (!isNaN(points)) {
+        if (!isNaN(points) && points > 0) {
+
             total += points;
             count++;
+
         }
 
     });
 
-
-    if (amount === 0) {
-
     if (count === 0) {
         return 0;
-
     }
-
-
-    return Math.round(total / amount);
 
     return Math.round(total / count);
 }
 
 
-/* ============================================
-   CREATE PLAYER
-============================================ */
-
-function createPlayerRow(
-    player,
-    position,
-    points
-) {
-// ===============================
+// ========================================
 // CREATE PLAYER ROW
-// ===============================
+// ========================================
 
-    const row =
-        document.createElement("div");
 function createPlayerRow(player, position, points) {
 
-    const tier = getTier(points);
-
-    const tier =
-        getTier(points);
-
-
-    row.className =
-        "player";
     const row = document.createElement("div");
 
     row.className = "leaderboard-row";
 
+    const tier = getTier(points);
+
     row.innerHTML = `
 
-        <div class="position">
-            #${position}
         <div class="player-position">
             ${position}
         </div>
-
-        ${getHead(player.name)}
 
         <div class="player-info">
 
@@ -139,123 +98,79 @@ function createPlayerRow(player, position, points) {
                 ${player.name}
             </div>
 
-            <div class="player-rank">
-                ${tier}
-            </div>
-
         </div>
 
-        <div class="points">
-            ${points.toLocaleString()} pts
         <div class="player-points">
-            ${points}
+            ${Number(points).toLocaleString()}
         </div>
 
-        <div class="tier ${tier}">
         <div class="player-tier tier-${tier.toLowerCase()}">
             ${tier}
         </div>
 
     `;
 
-
-    /* CLICK PLAYER */
-
-    row.addEventListener(
-        "click",
-        function() {
-
-            showPlayerProfile(
-                player.name
-            );
-
-        }
-    );
-
     row.addEventListener("click", () => {
-        showPlayerProfile(player);
+
+        showPlayerProfile(player.name);
+
     });
 
     return row;
-
 }
 
 
-/* ============================================
-   SHOW OVERALL
-============================================ */
+// ========================================
+// SHOW OVERALL
+// ========================================
 
 function showOverall() {
 
-    document
-        .getElementById(
-            "overallSection"
-        )
-        .classList.remove("hidden");
+    const overall = document.getElementById("overall");
+    const gamemodesSection = document.getElementById("gamemodes");
+    const gamemodePage = document.getElementById("gamemodePage");
+    const playerProfile = document.getElementById("playerProfile");
 
+    if (overall) {
+        overall.style.display = "block";
+    }
 
-    document
-        .getElementById(
-            "modesSection"
-        )
-        .classList.remove("hidden");
+    if (gamemodesSection) {
+        gamemodesSection.style.display = "block";
+    }
 
+    if (gamemodePage) {
+        gamemodePage.style.display = "none";
+    }
 
-    document
-        .getElementById(
-            "gamemodePage"
-        )
-        .classList.add("hidden");
+    if (playerProfile) {
+        playerProfile.style.display = "none";
+    }
 
+    renderOverall();
 
-    document
-        .getElementById(
-            "playerProfile"
-        )
-        .classList.add("hidden");
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* ============================================
-   RENDER OVERALL
-============================================ */
-// ===============================
+// ========================================
 // RENDER OVERALL
-// ===============================
+// ========================================
 
 function renderOverall() {
 
     const leaderboard =
-        document.getElementById(
-            "overallLeaderboard"
-        );
-
         document.getElementById("overallLeaderboard");
 
-    leaderboard.innerHTML = "";
-
-
-    const sorted =
-        players
-            .map(function(player) {
-    const playerCount =
-        document.getElementById("overallPlayerCount");
-
-                return {
-
-                    player: player,
-
-                    points:
-                        calculateOverall(player)
     if (!leaderboard) {
         return;
     }
 
-                };
     leaderboard.innerHTML = "";
 
-            })
     const rankedPlayers = players
         .map(player => {
 
@@ -264,7 +179,6 @@ function renderOverall() {
                 points: calculateOverall(player)
             };
 
-            .sort(function(a, b) {
         })
         .sort((a, b) => {
 
@@ -272,34 +186,13 @@ function renderOverall() {
                 return b.points - a.points;
             }
 
-            });
+            return a.player.name.localeCompare(
+                b.player.name
+            );
 
-
-    sorted.forEach(
-        function(entry, index) {
-
-            const row =
-                createPlayerRow(
-
-                    entry.player,
-
-                    index + 1,
-            return a.player.name.localeCompare(b.player.name);
-
-                    entry.points
         });
 
-                );
 
-    if (playerCount) {
-        playerCount.textContent =
-            `${players.length} players`;
-    }
-
-            leaderboard.appendChild(row);
-
-        }
-    );
     rankedPlayers.forEach((entry, index) => {
 
         const row = createPlayerRow(
@@ -308,31 +201,30 @@ function renderOverall() {
             entry.points
         );
 
-    document
-        .getElementById(
-            "overallPlayerCount"
-        )
-        .textContent =
-        players.length + " players";
         leaderboard.appendChild(row);
 
     });
+
+
+    const playerCount =
+        document.getElementById("overallPlayerCount");
+
+    if (playerCount) {
+
+        playerCount.textContent =
+            `${players.length} players`;
+
+    }
 }
 
 
-/* ============================================
-   RENDER GAMEMODES
-============================================ */
-// ===============================
+// ========================================
 // RENDER GAMEMODES
-// ===============================
+// ========================================
 
 function renderGamemodes() {
 
     const grid =
-        document.getElementById(
-            "gamemodeGrid"
-        );
         document.getElementById("gamemodeGrid");
 
     if (!grid) {
@@ -342,510 +234,18 @@ function renderGamemodes() {
     grid.innerHTML = "";
 
 
-    Object.keys(gamemodes)
-        .forEach(function(modeKey) {
-
-
-            const mode =
-                gamemodes[modeKey];
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "gamemode-card";
-
-    Object.entries(gamemodes).forEach(([key, mode]) => {
-
-            card.innerHTML = `
-        const card =
-            document.createElement("div");
-
-                <div>
-        card.className = "gamemode-card";
-
-                    <div class="mode-icon">
-
-                        <img
-                            src="${mode.icon}"
-                            alt="${mode.name}"
-                        >
-        /*
-         * Dacă icon-ul este o imagine,
-         * o afișăm ca imagine.
-         *
-         * Dacă este emoji/text,
-         * îl afișăm ca text.
-         */
-
-                    </div>
-        let iconHTML = "";
-
-                    <div class="mode-name">
-        if (
-            mode.icon &&
-            (
-                mode.icon.startsWith("http://") ||
-                mode.icon.startsWith("https://") ||
-                mode.icon.endsWith(".png") ||
-                mode.icon.endsWith(".jpg") ||
-                mode.icon.endsWith(".jpeg") ||
-                mode.icon.endsWith(".webp")
-            )
-        ) {
-
-                        ${mode.name}
-            iconHTML = `
-                <div class="mode-icon">
-                    <img
-                        src="${mode.icon}"
-                        alt="${mode.name}"
-                    >
-                </div>
-            `;
-
-                    </div>
-        } else {
-
-            iconHTML = `
-                <div class="mode-icon">
-                    <span>${mode.icon || ""}</span>
-                </div>
-            `;
-
-        }
-
-                <div class="mode-players">
-
-                    ${players.length}
-                    players
-        card.innerHTML = `
-
-                </div>
-            ${iconHTML}
-
-            `;
-            <div class="mode-name">
-                ${mode.name}
-            </div>
-
-            <div class="mode-players">
-                ${players.length} players
-            </div>
-
-            /* CLICK GAMEMODE */
-        `;
-
-            card.addEventListener(
-                "click",
-                function() {
-
-                    showGamemode(
-                        modeKey
-                    );
-        card.addEventListener("click", () => {
-
-                }
-            );
-            showGamemode(key);
-
-        });
-
-            grid.appendChild(card);
-
-        });
-        grid.appendChild(card);
-
-    });
-}
-
-
-/* ============================================
-   SHOW GAMEMODE
-============================================ */
-// ===============================
-// SHOW GAMEMODE
-// ===============================
-
-function showGamemode(modeKey) {
-
-    const mode =
-        gamemodes[modeKey];
-
-    const mode = gamemodes[modeKey];
-
-    if (!mode) {
-
-        return;
-
-    }
-
-
-    document
-        .getElementById(
-            "overallSection"
-        )
-        .classList.add("hidden");
-    const overall =
-        document.getElementById("overall");
-
-    const gamemodesSection =
-        document.getElementById("gamemodes");
-
-    document
-        .getElementById(
-            "modesSection"
-        )
-        .classList.add("hidden");
-    const gamemodePage =
-        document.getElementById("gamemodePage");
-
-    const playerProfile =
-        document.getElementById("playerProfile");
-
-    document
-        .getElementById(
-            "playerProfile"
-        )
-        .classList.add("hidden");
-
-    // Ascunde pagina principală
-    if (overall) {
-        overall.style.display = "none";
-    }
-
-    document
-        .getElementById(
-            "gamemodePage"
-        )
-        .classList.remove("hidden");
-    if (gamemodesSection) {
-        gamemodesSection.style.display = "none";
-    }
-
-    if (playerProfile) {
-        playerProfile.style.display = "none";
-    }
-
-    document
-        .getElementById(
-            "gamemodeTitle"
-        )
-        .textContent =
-        mode.name;
-
-    // Arată pagina gamemode-ului
-    if (gamemodePage) {
-        gamemodePage.style.display = "block";
-    }
-
-    document
-        .getElementById(
-            "gamemodeDescription"
-        )
-        .textContent =
-        mode.description;
-
-    // Titlu
-    const title =
-        document.getElementById("gamemodeTitle");
-
-    renderGamemode(
-        modeKey
-    );
-    if (title) {
-        title.textContent = mode.name;
-    }
-
-
-    window.scrollTo({
-    // Descriere
-    const description =
-        document.getElementById("gamemodeDescription");
-
-        top: 0,
-    if (description) {
-        description.textContent =
-            mode.description || "";
-    }
-
-        behavior: "smooth"
-
-    });
-    // Leaderboard
-    renderGamemode(modeKey);
-
-
-    // Scroll sus
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* ============================================
-   RENDER GAMEMODE
-============================================ */
-// ===============================
-// RENDER GAMEMODE LEADERBOARD
-// ===============================
-
-function renderGamemode(modeKey) {
-
-    const leaderboard =
-        document.getElementById(
-            "gamemodeLeaderboard"
-        );
-        document.getElementById("gamemodeLeaderboard");
-
-    if (!leaderboard) {
-        return;
-    }
-
-    leaderboard.innerHTML = "";
-
-
-    const sorted =
-        players
-            .map(function(player) {
-
-                return {
-    const rankedPlayers = players
-        .map(player => {
-
-                    player: player,
-
-                    points:
-                        player[modeKey] || 0
-
-                };
-
-            })
-            const points =
-                Number(player[modeKey]) || 0;
-
-            return {
-                player: player,
-                points: points
-            };
-
-            .sort(function(a, b) {
-        })
-        .sort((a, b) => {
-
-            if (b.points !== a.points) {
-                return b.points - a.points;
-            }
-
-            });
-            return a.player.name.localeCompare(b.player.name);
-
-        });
-
-    sorted.forEach(
-        function(entry, index) {
-
-            const row =
-                createPlayerRow(
-    rankedPlayers.forEach((entry, index) => {
-
-                    entry.player,
-        const row = createPlayerRow(
-            entry.player,
-            index + 1,
-            entry.points
-        );
-
-                    index + 1,
-        leaderboard.appendChild(row);
-
-                    entry.points
-    });
-}
-
-                );
-
-// ===============================
-// PLAYER PROFILE
-// ===============================
-
-            leaderboard.appendChild(row);
-function showPlayerProfile(player) {
-
-        }
-    );
-    const overall =
-        document.getElementById("overall");
-
-}
-    const gamemodesSection =
-        document.getElementById("gamemodes");
-
-    const gamemodePage =
-        document.getElementById("gamemodePage");
-
-/* ============================================
-   PLAYER PROFILE
-============================================ */
-    const playerProfile =
-        document.getElementById("playerProfile");
-
-function showPlayerProfile(name) {
-
-    const player =
-        players.find(
-            function(p) {
-    if (overall) {
-        overall.style.display = "none";
-    }
-
-                return p.name === name;
-    if (gamemodesSection) {
-        gamemodesSection.style.display = "none";
-    }
-
-            }
-        );
-    if (gamemodePage) {
-        gamemodePage.style.display = "none";
-    }
-
-    if (playerProfile) {
-        playerProfile.style.display = "block";
-    }
-
-    if (!player) {
-
-        return;
-    // Numele playerului
-    const profileName =
-        document.getElementById("profileName");
-
-    if (profileName) {
-        profileName.textContent = player.name;
-    }
-
-
-    document
-        .getElementById(
-            "overallSection"
-        )
-        .classList.add("hidden");
-    // Head
-    const profileHead =
-        document.getElementById("profileHead");
-
-    if (profileHead) {
-        profileHead.src = getHead(player.name);
-        profileHead.alt = player.name;
-    }
-
-    document
-        .getElementById(
-            "modesSection"
-        )
-        .classList.add("hidden");
-
-    // Overall points
-    const profilePoints =
-        document.getElementById("profileOverallPoints");
-
-    document
-        .getElementById(
-            "gamemodePage"
-        )
-        .classList.add("hidden");
-    if (profilePoints) {
-
-        profilePoints.textContent =
-            calculateOverall(player);
-
-    const profile =
-        document.getElementById(
-            "playerProfile"
-        );
-    }
-
-
-    profile.classList.remove(
-        "hidden"
-    );
-    // Overall tier
-    const profileTier =
-        document.getElementById("profileOverallTier");
-
-    if (profileTier) {
-
-    const overall =
-        calculateOverall(player);
-
-        profileTier.textContent =
-            getTier(calculateOverall(player));
-
-    const tier =
-        getTier(overall);
-    }
-
-
-    let modes = "";
-    // Gamemode list
-    const profileModes =
-        document.getElementById("profileGamemodes");
-
-    if (!profileModes) {
-        return;
-    }
-
-    Object.keys(gamemodes)
-        .forEach(function(modeKey) {
-
-    profileModes.innerHTML = "";
-
-            const mode =
-                gamemodes[modeKey];
-
     Object.entries(gamemodes).forEach(
         ([key, mode]) => {
 
-            const points =
-                player[modeKey] || 0;
-
-                Number(player[key]) || 0;
-
-            const modeTier =
-            const tier =
-                getTier(points);
-
-
-            modes += `
-            const row =
+            const card =
                 document.createElement("div");
 
-            row.className =
-                "profile-mode-row";
+            card.className = "gamemode-card";
 
-                <div
-                    class="profile-mode"
-                    data-mode="${modeKey}"
-                >
 
-                    <div class="profile-mode-name">
             let iconHTML = "";
 
-                        <img
-                            class="profile-mode-icon"
-                            src="${mode.icon}"
-                            alt="${mode.name}"
-                        >
 
-                        <span>
-                            ${mode.name}
-                        </span>
             if (
                 mode.icon &&
                 (
@@ -858,71 +258,120 @@ function showPlayerProfile(name) {
                 )
             ) {
 
-                    </div>
                 iconHTML = `
-                    <img
-                        class="profile-mode-icon"
-                        src="${mode.icon}"
-                        alt="${mode.name}"
-                    >
+                    <div class="mode-icon">
+                        <img
+                            src="${mode.icon}"
+                            alt="${mode.name}"
+                        >
+                    </div>
                 `;
 
             } else {
 
-                    <strong>
                 iconHTML = `
-                    <span class="profile-mode-icon-text">
+                    <div class="mode-icon">
                         ${mode.icon || ""}
-                    </span>
+                    </div>
                 `;
 
-                        ${points}
-                        pts
             }
 
-                    </strong>
 
-            row.innerHTML = `
+            card.innerHTML = `
 
-                    <span
-                        class="tier ${modeTier}"
-                    >
-                <div class="profile-mode-name">
+                ${iconHTML}
 
-                        ${modeTier}
-                    ${iconHTML}
-
-                    <span>
-                        ${mode.name}
-                    </span>
-
+                <div class="mode-name">
+                    ${mode.name}
                 </div>
 
-            `;
-                <div class="profile-mode-points">
-                    ${points}
-                </div>
-
-        });
-                <div class="profile-mode-tier tier-${tier.toLowerCase()}">
-                    ${tier}
+                <div class="mode-players">
+                    ${players.length} players
                 </div>
 
             `;
 
-    profile.innerHTML = `
 
-        <a
-            href="#overallSection"
-            class="back-button"
-        >
-            profileModes.appendChild(row);
+            card.addEventListener(
+                "click",
+                () => {
 
-            ← Back to Overall
+                    showGamemode(key);
+
+                }
+            );
+
+
+            grid.appendChild(card);
+
         }
     );
+}
 
-        </a>
+
+// ========================================
+// SHOW GAMEMODE
+// ========================================
+
+function showGamemode(modeKey) {
+
+    const mode = gamemodes[modeKey];
+
+    if (!mode) {
+        return;
+    }
+
+
+    const overall =
+        document.getElementById("overall");
+
+    const gamemodesSection =
+        document.getElementById("gamemodes");
+
+    const gamemodePage =
+        document.getElementById("gamemodePage");
+
+    const playerProfile =
+        document.getElementById("playerProfile");
+
+
+    if (overall) {
+        overall.style.display = "none";
+    }
+
+    if (gamemodesSection) {
+        gamemodesSection.style.display = "none";
+    }
+
+    if (playerProfile) {
+        playerProfile.style.display = "none";
+    }
+
+    if (gamemodePage) {
+        gamemodePage.style.display = "block";
+    }
+
+
+    const title =
+        document.getElementById("gamemodeTitle");
+
+    if (title) {
+        title.textContent = mode.name;
+    }
+
+
+    const description =
+        document.getElementById("gamemodeDescription");
+
+    if (description) {
+        description.textContent =
+            mode.description || "";
+    }
+
+
+    renderGamemode(modeKey);
+
 
     window.scrollTo({
         top: 0,
@@ -930,36 +379,240 @@ function showPlayerProfile(name) {
     });
 }
 
-        <div class="profile-card">
 
-            ${getHead(player.name)}
-// ===============================
-// SHOW MAIN PAGE
-// ===============================
+// ========================================
+// RENDER GAMEMODE LEADERBOARD
+// ========================================
 
-function showMainPage(scrollTarget = null) {
+function renderGamemode(modeKey) {
 
-            <h2>
+    const leaderboard =
+        document.getElementById("gamemodeLeaderboard");
+
+    if (!leaderboard) {
+        return;
+    }
+
+    leaderboard.innerHTML = "";
+
+
+    const rankedPlayers = players
+        .map(player => {
+
+            const points =
+                Number(player[modeKey]) || 0;
+
+            return {
+                player: player,
+                points: points
+            };
+
+        })
+        .sort((a, b) => {
+
+            if (b.points !== a.points) {
+                return b.points - a.points;
+            }
+
+            return a.player.name.localeCompare(
+                b.player.name
+            );
+
+        });
+
+
+    rankedPlayers.forEach((entry, index) => {
+
+        const row = createPlayerRow(
+            entry.player,
+            index + 1,
+            entry.points
+        );
+
+        leaderboard.appendChild(row);
+
+    });
+}
+
+
+// ========================================
+// PLAYER PROFILE
+// ========================================
+
+function showPlayerProfile(name) {
+
+    const player =
+        players.find(
+            p => p.name === name
+        );
+
+    if (!player) {
+        return;
+    }
+
+
     const overall =
         document.getElementById("overall");
 
-                ${player.name}
     const gamemodesSection =
         document.getElementById("gamemodes");
 
-            </h2>
     const gamemodePage =
         document.getElementById("gamemodePage");
 
     const playerProfile =
         document.getElementById("playerProfile");
 
-            <div class="profile-overall">
 
-                <span>
-                    Overall
-                </span>
-    // Arată pagina principală
+    if (overall) {
+        overall.style.display = "none";
+    }
+
+    if (gamemodesSection) {
+        gamemodesSection.style.display = "none";
+    }
+
+    if (gamemodePage) {
+        gamemodePage.style.display = "none";
+    }
+
+    if (playerProfile) {
+        playerProfile.style.display = "block";
+    }
+
+
+    const profileName =
+        document.getElementById("profileName");
+
+    if (profileName) {
+        profileName.textContent = player.name;
+    }
+
+
+    const profileHead =
+        document.getElementById("profileHead");
+
+    if (profileHead) {
+        profileHead.src = getHead(player.name);
+        profileHead.alt = player.name;
+    }
+
+
+    const overallPoints =
+        calculateOverall(player);
+
+    const profilePoints =
+        document.getElementById("profileOverallPoints");
+
+    if (profilePoints) {
+        profilePoints.textContent =
+            overallPoints;
+    }
+
+
+    const profileTier =
+        document.getElementById("profileOverallTier");
+
+    if (profileTier) {
+        profileTier.textContent =
+            getTier(overallPoints);
+    }
+
+
+    const profileGamemodes =
+        document.getElementById("profileGamemodes");
+
+    if (!profileGamemodes) {
+        return;
+    }
+
+    profileGamemodes.innerHTML = "";
+
+
+    Object.entries(gamemodes).forEach(
+        ([key, mode]) => {
+
+            const points =
+                Number(player[key]) || 0;
+
+            const tier =
+                getTier(points);
+
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "profile-mode-row";
+
+
+            row.innerHTML = `
+
+                <div class="profile-mode-name">
+
+                    <span>
+                        ${mode.icon || ""}
+                    </span>
+
+                    <span>
+                        ${mode.name}
+                    </span>
+
+                </div>
+
+                <div class="profile-mode-points">
+                    ${points}
+                </div>
+
+                <div class="profile-mode-tier tier-${tier.toLowerCase()}">
+                    ${tier}
+                </div>
+
+            `;
+
+
+            row.addEventListener(
+                "click",
+                () => {
+
+                    showGamemode(key);
+
+                }
+            );
+
+
+            profileGamemodes.appendChild(row);
+
+        }
+    );
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// ========================================
+// SHOW MAIN PAGE
+// ========================================
+
+function showMainPage(scrollTarget = null) {
+
+    const overall =
+        document.getElementById("overall");
+
+    const gamemodesSection =
+        document.getElementById("gamemodes");
+
+    const gamemodePage =
+        document.getElementById("gamemodePage");
+
+    const playerProfile =
+        document.getElementById("playerProfile");
+
+
     if (overall) {
         overall.style.display = "block";
     }
@@ -968,176 +621,122 @@ function showMainPage(scrollTarget = null) {
         gamemodesSection.style.display = "block";
     }
 
-                <strong>
-
-                    ${overall}
-                    pts
-    // Ascunde paginile secundare
     if (gamemodePage) {
         gamemodePage.style.display = "none";
     }
 
-                </strong>
     if (playerProfile) {
         playerProfile.style.display = "none";
     }
 
 
-                <div
-                    class="tier ${tier}"
-                >
-    // Scroll
     if (scrollTarget) {
 
-                    ${tier}
         setTimeout(() => {
 
-                </div>
             const target =
                 document.getElementById(scrollTarget);
 
-            </div>
             if (target) {
 
-        </div>
                 target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
+                    behavior: "smooth"
                 });
 
             }
 
-        <div class="section-title">
         }, 50);
 
-            <div>
     } else {
 
-                <span class="section-small">
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
 
-                    RANKINGS
     }
 }
 
-                </span>
 
-// ===============================
+// ========================================
 // NAVIGATION
-// ===============================
+// ========================================
 
-                <h2>
 function setupNavigation() {
 
-                    Gamemodes
-    // ===========================
-    // OVERALL
-    // ===========================
-
-                </h2>
     const overallLinks =
         document.querySelectorAll(
             'a[href="#overall"]'
         );
 
-            </div>
 
-        </div>
     overallLinks.forEach(link => {
 
-        link.addEventListener("click", (event) => {
+        link.addEventListener(
+            "click",
+            event => {
 
-        <div class="profile-modes">
-            event.preventDefault();
+                event.preventDefault();
 
-            ${modes}
-            showMainPage("overall");
+                showMainPage("overall");
 
-        </div>
-        });
+            }
+        );
 
-    `;
     });
 
 
-    /* CLICK GAMEMODES FROM PROFILE */
-    // ===========================
-    // GAMEMODES
-    // ===========================
-
-    profile
-        .querySelectorAll(
-            ".profile-mode"
-        )
-        .forEach(function(element) {
-    const gamemodesLinks =
+    const gamemodeLinks =
         document.querySelectorAll(
             'a[href="#gamemodes"]'
         );
 
 
-            element.addEventListener(
-                "click",
-                function() {
-    gamemodesLinks.forEach(link => {
+    gamemodeLinks.forEach(link => {
 
-                    showGamemode(
-                        element.dataset.mode
-                    );
-        link.addEventListener("click", (event) => {
+        link.addEventListener(
+            "click",
+            event => {
 
-                }
-            );
-            event.preventDefault();
+                event.preventDefault();
 
-            showMainPage("gamemodes");
+                showMainPage("gamemodes");
 
-        });
+            }
+        );
 
     });
 
 
-    window.scrollTo({
-    // ===========================
-    // BACK BUTTONS
-    // ===========================
-
-        top: 0,
     const backButtons =
         document.querySelectorAll(
             ".back-button, [data-back]"
         );
 
-        behavior: "smooth"
 
     backButtons.forEach(button => {
 
-        button.addEventListener("click", (event) => {
+        button.addEventListener(
+            "click",
+            event => {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            showMainPage();
+                showMainPage();
 
-        });
+            }
+        );
 
     });
-
 }
 
 
-/* ============================================
-   START
-============================================ */
-// ===============================
-// START WEBSITE
-// ===============================
+// ========================================
+// START
+// ========================================
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
     () => {
 
         renderOverall();
