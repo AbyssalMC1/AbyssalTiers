@@ -122,8 +122,7 @@ const gamemodes = {
 
     cart: {
         name: "Cart",
-        icon: "images/cart.png
-            ",
+        icon: "images/cart.png",
         description: "Cart rankings."
     },
 
@@ -132,7 +131,7 @@ const gamemodes = {
         icon: "images/pearlfight.png",
         description: "Pearl Fight rankings."
     },
-    
+
     spleef: {
         name: "Spleef",
         icon: "images/spleef.png",
@@ -140,7 +139,6 @@ const gamemodes = {
     }
 
 };
-
 
 
 const players = [
@@ -173,7 +171,6 @@ const players = [
         spleef: 0
     },
 
-
     {
         name: "CocoMineru",
 
@@ -201,7 +198,6 @@ const players = [
         pearlfight: 0,
         spleef: 0
     },
-
 
     {
         name: "seby88213",
@@ -231,7 +227,6 @@ const players = [
         spleef: 0
     },
 
-
     {
         name: "Femyth",
 
@@ -255,12 +250,11 @@ const players = [
         fireballfight: 0,
         fireballmace: 0,
         crystal: 0,
-        carts: 0,
+        cart: 0,
         pearlfight: 0,
         spleef: 0
     },
 
-    
     {
         name: "Kappa8081",
 
